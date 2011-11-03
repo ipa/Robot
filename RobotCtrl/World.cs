@@ -20,28 +20,28 @@ namespace RobotCtrl
         #region properties
         public static Robot Robot { get; set; }
       
-        //public static ObstacleMap ObstacleMap { get; set; }
+        public static ObstacleMap ObstacleMap { get; set; }
         #endregion
 
 
         #region methods
-        //public static float GetFreeSpace()
-        //{
-        //    if (ObstacleMap != null)
-        //    {
-        //        PositionInfo offset = Robot.Radar.AntennaPosition;
-        //        PositionInfo position = Robot.Position;
+        public static float GetFreeSpace()
+        {
+            if (ObstacleMap != null)
+            {
+                PositionInfo offset = Robot.Radar.AntennaPosition;
+                PositionInfo position = Robot.Position;
 
-        //        float phi = position.Angle / 180.0f * (float)Math.PI;
+                float phi = position.Angle / 180.0f * (float)Math.PI;
 
-        //        PositionInfo radarPos = new PositionInfo(
-        //            position.X + offset.X * (float)Math.Cos(phi) - offset.Y * (float)Math.Sin(phi),
-        //            position.Y + offset.X * (float)Math.Sin(phi) + offset.Y * (float)Math.Cos(phi),
-        //            (position.Angle + offset.Angle) % 360);
-        //        return (float)ObstacleMap.GetFreeSpace(radarPos);
-        //    }
-        //    else return 2.55f;
-        //}
+                PositionInfo radarPos = new PositionInfo(
+                    position.X + offset.X * (float)Math.Cos(phi) - offset.Y * (float)Math.Sin(phi),
+                    position.Y + offset.X * (float)Math.Sin(phi) + offset.Y * (float)Math.Cos(phi),
+                    (position.Angle + offset.Angle) % 360);
+                return (float)ObstacleMap.GetFreeSpace(radarPos);
+            }
+            else return 2.55f;
+        }
         #endregion
     }
 }

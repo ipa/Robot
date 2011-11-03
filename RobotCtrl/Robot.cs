@@ -8,17 +8,24 @@ namespace RobotCtrl
 {
     public class Robot
     {
+        public Robot(RunMode runMode)
+        {
+            this.RunMode = runMode;
+            this.Radar = new Radar(runMode);
+        }
+
+        public RunMode RunMode
+        { get; set; }
 
         public Color Color
-        {
-            get;
-            set;
-        }
+        { get; set; }
 
         public PositionInfo Position
         { get {return drv.Position; } }
 
         public Drive drv {get;set;}
+
+        public Radar Radar { get; set; }
 
     }
 }

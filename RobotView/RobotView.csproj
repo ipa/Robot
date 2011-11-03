@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{38E7D961-0339-491C-A78E-3CAC0DC17FED}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -198,6 +198,11 @@
       <Project>{62901C2B-AF62-44CD-A770-D6738FF4F126}</Project>
       <Name>RobotCtrl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ObstacleMap1a.png" />
+    <None Include="Resources\ObstacleMap1b.png" />
+    <None Include="Resources\ObstacleMap1c.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

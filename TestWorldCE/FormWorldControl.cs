@@ -22,16 +22,20 @@ namespace TestWorldCE
             this.driveView1.Drive = drv;
             this.trackArc1.drive = drv;
             this.trackTurnView1.drive = drv;
-            Robot r = new Robot();
+
+            Robot r = new Robot(RunMode.Virtual);
             r.drv = drv;
             r.Color = Color.Red;
             World.Robot = r;
-            FormWorldView view = new FormWorldView();
-            view.ViewPort = new RobotView.ViewPort(-5, 5, -5, 5);
-            view.Show();
-            
-        }
 
-      
+            if (r.RunMode == RunMode.Virtual)
+            {
+                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1b, -1, 4, -2, 2);
+            }
+
+            FormWorldView view = new FormWorldView();
+            view.ViewPort = new RobotView.ViewPort(-1, 4, -2, 2);
+            view.Show();
+        }
     }
 }

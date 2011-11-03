@@ -240,6 +240,9 @@ namespace RobotView
 
                 
                 Robot robot = World.Robot;
+
+                double phi = (robot.Position.Angle) * (Math.PI / 180.0);
+
                 if (robot != null)
                 {
                     #region Roboter zeichnen
@@ -255,14 +258,44 @@ namespace RobotView
                     g.DrawLine(new Pen(Color.Black,1.0f),
                                    (int)this.XtoScreen(robot.Position.X), //+ (int)(this.WidthToScreen(Constants.Width) / 2.0),
                                    (int)this.YtoScreen(robot.Position.Y), //+ (int)(this.HeightToScreen(Constants.Width) / 2.0),
-                                   (int)(this.XtoScreen(robot.Position.X)  + Math.Cos((robot.Position.Angle) * (Math.PI / 180.0)) * (this.WidthToScreen(Constants.Width)/2.0)),
+                                   (int)(this.XtoScreen(robot.Position.X)  + Math.Cos(phi) * (this.WidthToScreen(Constants.Width)/2.0)),
 
-                                   (int)(this.YtoScreen(robot.Position.Y) + Math.Sin((robot.Position.Angle) * (Math.PI / 180.0)) * (this.HeightToScreen(Constants.Width)/2.0))
+                                   (int)(this.YtoScreen(robot.Position.Y) + Math.Sin(phi) * (this.HeightToScreen(Constants.Width)/2.0))
                                    );
 
                     #endregion
                 }
-                
+
+                // Map
+                ObstacleMap obstMap = World.ObstacleMap;
+                if (World.ObstacleMap != null)
+                {
+                    Bitmap bmp = obstMap.Image;
+                    RectangleF area = obstMap.Area;
+                    int rx1 = XtoScreen(area.Left);
+                    int ry1 = YtoScreen(area.Bottom);
+                    int rx2 = XtoScreen(area.Right);
+                    int ry2 = YtoScreen(area.Top);
+                    g.DrawImage(
+                    World.ObstacleMap.Image,
+                    new Rectangle(rx1, ry1, rx2 - rx1, ry2 - ry1),
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    GraphicsUnit.Pixel);
+                }
+
+                // Roboter.Radar
+                PositionInfo radarOffset = robot.Radar.AntennaPosition;
+                PositionInfo pos = robot.Position;
+                PositionInfo radarPos = new PositionInfo(
+                pos.X + radarOffset.X * (float)Math.Cos(phi) - radarOffset.Y * (float)Math.Sin(phi),
+                pos.Y + radarOffset.X * (float)Math.Sin(phi) + radarOffset.Y * (float)Math.Cos(phi),
+                (pos.Angle + radarOffset.Angle) % 360);
+                double radarPhi = radarPos.Angle / 180.0 * Math.PI;
+                double distance = robot.Radar.Distance;
+                // Radarstrahl zeichnen...
+                g.DrawLine(penRadar, XtoScreen(radarPos.X), YtoScreen(radarPos.Y),
+                XtoScreen(radarPos.X + distance * Math.Cos(radarPhi)),
+                YtoScreen(radarPos.Y + distance * Math.Sin(radarPhi)));
             }
 
             pictureBox.Image = plot;
