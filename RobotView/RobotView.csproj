@@ -1,0 +1,217 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{38E7D961-0339-491C-A78E-3CAC0DC17FED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RobotView</RootNamespace>
+    <AssemblyName>RobotView</AssemblyName>
+    <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
+    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
+    <OSVersion>5.0</OSVersion>
+    <DeployDirSuffix>RobotView</DeployDirSuffix>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <NativePlatformName>Windows CE</NativePlatformName>
+    <FormFactorID>
+    </FormFactorID>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(PlatformFamilyName)</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <FileAlignment>512</FileAlignment>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonRunParameters.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonRunParameters.Designer.cs">
+      <DependentUpon>CommonRunParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConsoleView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ConsoleView.Designer.cs">
+      <DependentUpon>ConsoleView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DriveCtrlView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DriveCtrlView.Designer.cs">
+      <DependentUpon>DriveCtrlView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DriveView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DriveView.designer.cs">
+      <DependentUpon>DriveView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LedView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LedView.Designer.cs">
+      <DependentUpon>LedView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MotorCtrlView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MotorCtrlView.designer.cs">
+      <DependentUpon>MotorCtrlView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RunLineView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RunLineView.Designer.cs">
+      <DependentUpon>RunLineView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SwitchView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SwitchView.Designer.cs">
+      <DependentUpon>SwitchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrackArc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TrackArc.Designer.cs">
+      <DependentUpon>TrackArc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrackTurnView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TrackTurnView.Designer.cs">
+      <DependentUpon>TrackTurnView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewPort.cs" />
+    <Compile Include="WorldView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="WorldView.Designer.cs">
+      <DependentUpon>WorldView.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CommonRunParameters.resx">
+      <DependentUpon>CommonRunParameters.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ConsoleView.resx">
+      <DependentUpon>ConsoleView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DriveCtrlView.resx">
+      <DependentUpon>DriveCtrlView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DriveView.resx">
+      <DependentUpon>DriveView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LedView.resx">
+      <DependentUpon>LedView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MotorCtrlView.resx">
+      <DependentUpon>MotorCtrlView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RunLineView.resx">
+      <DependentUpon>RunLineView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SwitchView.resx">
+      <DependentUpon>SwitchView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrackArc.resx">
+      <DependentUpon>TrackArc.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrackTurnView.resx">
+      <DependentUpon>TrackTurnView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WorldView.resx">
+      <DependentUpon>WorldView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LedOff.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LedOn.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwitchOff.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SwitchOn.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RobotCtrl\RobotCtrl.csproj">
+      <Project>{62901C2B-AF62-44CD-A770-D6738FF4F126}</Project>
+      <Name>RobotCtrl</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}">
+        <HostingProcess disable="1" />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
