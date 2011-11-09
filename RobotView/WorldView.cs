@@ -218,6 +218,24 @@ namespace RobotView
                 // Hintergrund löschen
                 g.Clear(Color.White);
 
+                // Map
+                ObstacleMap obstMap = World.ObstacleMap;
+                if (World.ObstacleMap != null)
+                {
+                    Bitmap bmp = obstMap.Image;
+                    RectangleF area = obstMap.Area;
+                    int rx1 = XtoScreen(area.Left);
+                    int ry1 = YtoScreen(area.Top);
+                    int rx2 = XtoScreen(area.Right);
+                    int ry2 = YtoScreen(area.Bottom);
+                    g.DrawImage(
+                    bmp,
+                    new Rectangle(rx1, ry1, rx2 - rx1, ry2 - ry1),
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    GraphicsUnit.Pixel);
+                    //g.DrawImage(bmp, rx1, ry2);
+                }
+
 
                 #region Koordinaten-Netz zeichnen
                 // TODO Grid zeichnen
@@ -236,7 +254,6 @@ namespace RobotView
                 }
 
                 #endregion
-
 
                 
                 Robot robot = World.Robot;
@@ -264,23 +281,6 @@ namespace RobotView
                                    );
 
                     #endregion
-                }
-
-                // Map
-                ObstacleMap obstMap = World.ObstacleMap;
-                if (World.ObstacleMap != null)
-                {
-                    Bitmap bmp = obstMap.Image;
-                    RectangleF area = obstMap.Area;
-                    int rx1 = XtoScreen(area.Left);
-                    int ry1 = YtoScreen(area.Bottom);
-                    int rx2 = XtoScreen(area.Right);
-                    int ry2 = YtoScreen(area.Top);
-                    g.DrawImage(
-                    World.ObstacleMap.Image,
-                    new Rectangle(rx1, ry1, rx2 - rx1, ry2 - ry1),
-                    new Rectangle(0, 0, bmp.Width, bmp.Height),
-                    GraphicsUnit.Pixel);
                 }
 
                 // Roboter.Radar

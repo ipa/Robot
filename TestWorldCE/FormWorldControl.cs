@@ -12,6 +12,11 @@ namespace TestWorldCE
 {
     public partial class FormWorldControl : Form
     {
+        private const int xMin = 0;
+        private const int xMax = 5;
+        private const int yMin = -2;
+        private const int yMax = 2;
+
         public FormWorldControl()
         {
             InitializeComponent();
@@ -30,11 +35,11 @@ namespace TestWorldCE
 
             if (r.RunMode == RunMode.Virtual)
             {
-                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1b, -1, 4, -2, 2);
+                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1b, xMin, xMax, yMin, yMax);
             }
 
             FormWorldView view = new FormWorldView();
-            view.ViewPort = new RobotView.ViewPort(-1, 4, -2, 2);
+            view.ViewPort = new RobotView.ViewPort(xMin, xMax, yMin, yMax);
             view.Show();
         }
     }
