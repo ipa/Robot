@@ -57,10 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="DriveTask\DriveTask.cs" />
+    <Compile Include="DriveTask\RunAroundObstacles.cs" />
+    <Compile Include="DriveTask\RunSomeMeters.cs" />
     <Compile Include="Drive\Drive.cs" />
     <Compile Include="Drive\DriveInfo.cs" />
     <Compile Include="Drive\Track.cs" />
     <Compile Include="Drive\TrackArcLeft.cs" />
+    <Compile Include="Drive\TrackArcRight.cs" />
     <Compile Include="Drive\TrackLine.cs" />
     <Compile Include="Drive\TrackTurn.cs" />
     <Compile Include="Engine\DriveCtrl.cs" />
@@ -77,6 +81,7 @@
     <Compile Include="Output\DigitalOut.cs" />
     <Compile Include="Output\DigitalOutHW.cs" />
     <Compile Include="Output\DigitalOutSim.cs" />
+    <Compile Include="Output\HalbschueException.cs" />
     <Compile Include="PositionInfo.cs" />
     <Compile Include="Radar\Radar.cs" />
     <Compile Include="Radar\RadarSensor.cs" />

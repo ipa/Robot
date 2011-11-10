@@ -12,33 +12,36 @@ namespace TestWorldCE
 {
     public partial class FormWorldControl : Form
     {
-        private const int xMin = 0;
-        private const int xMax = 5;
-        private const int yMin = -2;
-        private const int yMax = 2;
+        private const int xMin = -1;
+        private const int xMax = 6;
+        private const int yMin = -1;
+        private const int yMax = 3;
 
         public FormWorldControl()
         {
             InitializeComponent();
 
             Drive drv = new Drive(RunMode.Virtual);
-            this.driveCtrlView1.DriveCtrl = drv.DriveCtrl;
             this.runLineView1.drive = drv;
             this.driveView1.Drive = drv;
             this.trackArc1.drive = drv;
             this.trackTurnView1.drive = drv;
-
+            
             Robot r = new Robot(RunMode.Virtual);
+            drv.Position = new PositionInfo(0f, 1.5f, 0f);
             r.drv = drv;
             r.Color = Color.Red;
             World.Robot = r;
+
+            RobotConsole rc = r.RobotConsole;
+            consoleView1.RobotConsole = rc;
 
             if (r.RunMode == RunMode.Virtual)
             {
                 World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1b, xMin, xMax, yMin, yMax);
             }
 
-            FormWorldView view = new FormWorldView();
+            FormWorldView view = new FormWorldView(xMin, yMin, xMax, yMax);
             view.ViewPort = new RobotView.ViewPort(xMin, xMax, yMin, yMax);
             view.Show();
         }
