@@ -23,5 +23,15 @@ namespace RobotCtrl
             Y = y;
             Angle = angle;
         }
+
+        public static bool operator != (PositionInfo pi1, PositionInfo pi2)
+        {
+            return !(pi1 == pi2);
+        }
+
+        public static bool operator ==(PositionInfo pi1, PositionInfo pi2)
+        {
+            return pi1.X == pi2.X && pi1.Y == pi2.Y;
+        }
     }
 }

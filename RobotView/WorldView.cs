@@ -231,17 +231,16 @@ namespace RobotView
                 {
                     Bitmap bmp = obstMap.Image;
                     RectangleF area = obstMap.Area;
-                    int rx1 = XtoScreen(area.Left);
-                    int ry1 = YtoScreen(area.Top);
-                    int rx2 = XtoScreen(area.Right);
-                    int ry2 = YtoScreen(area.Bottom);
+                    int rx1 = XtoScreen(area.Left + 0.50f);
+                    int ry1 = YtoScreen(area.Bottom + 0.50f);
+                    int rx2 = XtoScreen(area.Right + 0.50f);
+                    int ry2 = YtoScreen(area.Top + 0.50f);
                     g.DrawImage(
-                    bmp,
-                    new Rectangle(rx1, ry1, rx2 - rx1, ry2 - ry1),
-                    new Rectangle(0, 0, bmp.Width, bmp.Height),
-                    GraphicsUnit.Pixel);
-                    //g.DrawImage(bmp, rx1, ry2);
-                }
+                        bmp,
+                        new Rectangle(rx1, ry1, (rx2 - rx1), (ry2 - ry1)),
+                        new Rectangle(0, 0, bmp.Width, bmp.Height),
+                        GraphicsUnit.Pixel);
+                 }
 
 
                 #region Koordinaten-Netz zeichnen

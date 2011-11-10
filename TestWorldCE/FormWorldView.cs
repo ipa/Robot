@@ -13,10 +13,10 @@ namespace TestWorldCE
 {
     public partial class FormWorldView : Form
     {
-        public FormWorldView()
+        public FormWorldView(int xMin, int yMin, int xMax, int yMax)
         {
             InitializeComponent();
-            ViewPort p = new ViewPort(-1, 5, -1, 5);
+            ViewPort p = new ViewPort(xMin, xMax, yMin, yMax);
             this.ViewPort = p;
     
             

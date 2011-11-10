@@ -20,8 +20,16 @@ namespace RobotCtrl
         {
             this.RunMode = runMode;
             this.Radar = new Radar(runMode);
+
             storedPositions = new List<PositionInfo>();
             recordTimer = new Timer(StorePosition, null, (int)(recordTime * 1000),(int)( recordTime * 1000));
+
+      	    this.RobotConsole = new RobotConsole(runMode);
+
+            this.RobotConsole[Switches.Switch1].SwitchStateChanged += SwitchStateChangedRunAroundObstacles;
+            //this.RobotConsole[Switches.Switch2].SwitchStateChanged += SwitchStateChanged;
+            //this.RobotConsole[Switches.Switch3].SwitchStateChanged += SwitchStateChanged;
+            //this.RobotConsole[Switches.Switch4].SwitchStateChanged += SwitchStateChanged;
             
         }
 
@@ -53,6 +61,7 @@ namespace RobotCtrl
             {
                 return storedPositions.ToArray();
             }
+
         }
 
         public RunMode RunMode
@@ -62,7 +71,7 @@ namespace RobotCtrl
         { get; set; }
 
         public PositionInfo Position
-        { get {return drv.Position; } }
+        { get { return drv.Position; } }
 
         public Drive drv {get;set;}
 
@@ -103,5 +112,35 @@ namespace RobotCtrl
         }
 
         #endregion
+
+
+        public RobotConsole RobotConsole
+        {
+            get;
+            private set;
+        }
+
+        public DriveTask ActualDriveTask { get; private set; }
+
+        private void SwitchStateChangedRunAroundObstacles(object sender, SwitchEventArgs e)
+        {
+            if (e.SwitchEnabled)
+            {
+                if (ActualDriveTask != null)
+                {
+                    this.ActualDriveTask.Stop();
+                }
+                this.ActualDriveTask = new RunAroundObstacles();
+                this.ActualDriveTask.Go();
+            }
+            else
+            {
+                if (this.ActualDriveTask != null)
+                {
+                    this.ActualDriveTask.Stop();
+                }
+            }
+        }
+
     }
 }

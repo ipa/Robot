@@ -205,6 +205,11 @@ namespace RobotCtrl
             if (track == null) track = new TrackArcLeft(radius, angle, speed, acceleration);
         }
 
+        public void RunArcRight(float radius, float angle, float speed, float acceleration)
+        {
+            if (disposed) throw new ObjectDisposedException("Drive");
+            if (track == null) track = new TrackArcRight(radius, angle, speed, acceleration);
+        }
 
         /// <summary>
         /// Fährt eine Rechtskurve
