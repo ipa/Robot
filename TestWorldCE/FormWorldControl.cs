@@ -40,6 +40,7 @@ namespace TestWorldCE
             World.Robot = r;
 
             RobotConsole rc = r.RobotConsole;
+           
             consoleView1.RobotConsole = rc;
 
             if (r.RunMode == RunMode.Virtual)
@@ -50,6 +51,11 @@ namespace TestWorldCE
             FormWorldView view = new FormWorldView(xMin, yMin, xMax, yMax);
             view.ViewPort = new RobotView.ViewPort(xMin, xMax, yMin, yMax);
             view.Show();
+
+            BlinkingLed led = rc[BlinkingLeds.BlinkingLed4];
+            led.Frequency = 5;
+            led.LedEnabled = true;
+
         }
     }
 }

@@ -8,6 +8,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace RobotCtrl
 {
@@ -28,8 +29,9 @@ namespace RobotCtrl
     {
 
         #region members
-        private Leds led;
-        private DigitalOut digitalOut;
+        protected Leds led;
+        protected DigitalOut digitalOut;
+        
         bool oldState;
         #endregion
 
@@ -70,7 +72,7 @@ namespace RobotCtrl
         /// <summary>
         /// Liefert bzw. setzt den Zustand der LED (ein-/ausgeschaltet)
         /// </summary>
-        public bool LedEnabled
+        public virtual bool LedEnabled
         {
             get { return digitalOut[(int)this.led]; }
             set

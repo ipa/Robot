@@ -84,6 +84,17 @@ namespace RobotCtrl
         {
             get { return this.switches[(int)swi]; }
         }
+
+        /// <summary>
+        /// Factory für Blinkingleds...
+        /// </summary>
+        /// <param name="led"></param>
+        /// <returns></returns>
+        public BlinkingLed this[BlinkingLeds led]
+        {
+            get { return new BlinkingLed(this.digitalOut, led); }
+        
+        }
         #endregion
 
     }
