@@ -101,6 +101,13 @@ namespace RobotView
 
 
         #region methods
+
+        public void SaveImage(string filename)
+        {
+            this.pictureBox.Image.Save(filename, System.Drawing.Imaging.ImageFormat.Bmp);
+        
+        }
+
         /// <summary>
         /// Sorgt dafür, dass der Inhalt neu gezeichnet wird, falls die Grösse
         /// der WorldView verändert wird.
@@ -159,7 +166,7 @@ namespace RobotView
         private int YtoScreen(double y)
         {
             // ToDo (Dreisatzrechnung)
-            return (int)map(this.viewPort.yMin, this.viewPort.yMax, 0, this.Height, y);
+            return (int)map(this.viewPort.yMax, this.viewPort.yMin, 0, this.Height, y);
         }
 
 
@@ -242,7 +249,7 @@ namespace RobotView
                 // Vertikale Linien die >viewPort.xMin bzw. <viewPort.xMax sind zeichnen...
                 for (int i = (int)Math.Ceiling(viewPort.xMin); i < (int)Math.Floor(this.viewPort.xMax); i++)
                 {
-                    Pen pen =  i == 0 ? penGrid1 : penGrid2;
+                    Pen pen = i == 0 ? penGrid1 : penGrid2;
                     g.DrawLine(pen, XtoScreen(i), 0, XtoScreen(i), this.Height);
                 }
 
@@ -255,7 +262,7 @@ namespace RobotView
 
                 #endregion
 
-                
+
                 Robot robot = World.Robot;
 
                 double phi = (robot.Position.Angle) * (Math.PI / 180.0);
@@ -263,21 +270,21 @@ namespace RobotView
                 if (robot != null)
                 {
                     #region Roboter zeichnen
-                    
+
 
                     g.FillEllipse(new SolidBrush(robot.Color),
-                                     (int)(this.XtoScreen(robot.Position.X) - (this.WidthToScreen(Constants.Width)/2.0)),
+                                     (int)(this.XtoScreen(robot.Position.X) - (this.WidthToScreen(Constants.Width) / 2.0)),
                                      (int)(this.YtoScreen(robot.Position.Y) - (this.HeightToScreen(Constants.Width) / 2.0)),
                                      this.WidthToScreen(Constants.Width),
                                      this.HeightToScreen(Constants.Width)
                                      );
 
-                    g.DrawLine(new Pen(Color.Black,1.0f),
+                    g.DrawLine(new Pen(Color.Black, 1.0f),
                                    (int)this.XtoScreen(robot.Position.X), //+ (int)(this.WidthToScreen(Constants.Width) / 2.0),
                                    (int)this.YtoScreen(robot.Position.Y), //+ (int)(this.HeightToScreen(Constants.Width) / 2.0),
-                                   (int)(this.XtoScreen(robot.Position.X)  + Math.Cos(phi) * (this.WidthToScreen(Constants.Width)/2.0)),
+                                   (int)(this.XtoScreen(robot.Position.X) + Math.Cos(phi) * (this.WidthToScreen(Constants.Width) / 2.0)),
 
-                                   (int)(this.YtoScreen(robot.Position.Y) + Math.Sin(phi) * (this.HeightToScreen(Constants.Width)/2.0))
+                                   (int)(this.YtoScreen(robot.Position.Y) + Math.Sin(phi) * (this.HeightToScreen(Constants.Width) / 2.0))
                                    );
 
                     #endregion
@@ -292,10 +299,30 @@ namespace RobotView
                 (pos.Angle + radarOffset.Angle) % 360);
                 double radarPhi = radarPos.Angle / 180.0 * Math.PI;
                 double distance = robot.Radar.Distance;
+
                 // Radarstrahl zeichnen...
                 g.DrawLine(penRadar, XtoScreen(radarPos.X), YtoScreen(radarPos.Y),
                 XtoScreen(radarPos.X + distance * Math.Cos(radarPhi)),
                 YtoScreen(radarPos.Y + distance * Math.Sin(radarPhi)));
+
+                //Pfad zeichnen
+                PositionInfo[] path = robot.GetPath();
+                Pen penPath = new Pen(Color.Blue,1);
+                for (int i = 0; i < path.Length-1; i++)
+                {
+
+                    int x1 = XtoScreen(path[i].X);
+                    int y1 = YtoScreen(path[i].Y);
+
+                    int x2 = XtoScreen(path[i + 1].X);
+                    int y2 = YtoScreen(path[i + 1].Y);
+
+                    g.DrawLine(penPath, x1, y1, x2, y2);
+
+
+                }
+
+
             }
 
             pictureBox.Image = plot;
