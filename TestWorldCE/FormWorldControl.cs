@@ -12,10 +12,12 @@ namespace TestWorldCE
 {
     public partial class FormWorldControl : Form
     {
+
         private const int xMin = -1;
         private const int xMax = 6;
         private const int yMin = -1;
         private const int yMax = 3;
+
 
         public FormWorldControl()
         {
@@ -28,7 +30,11 @@ namespace TestWorldCE
             this.trackTurnView1.drive = drv;
             
             Robot r = new Robot(RunMode.Virtual);
+
+            r.ConfigurePathRecording(0.05f, 0.1f);
+
             drv.Position = new PositionInfo(0f, 1.5f, 0f);
+
             r.drv = drv;
             r.Color = Color.Red;
             World.Robot = r;
