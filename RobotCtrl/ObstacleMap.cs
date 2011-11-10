@@ -40,6 +40,8 @@ namespace RobotCtrl
         public ObstacleMap(Bitmap image, RectangleF area)
         {
             SetImage(image);
+
+
             this.area = area;
         }
 
