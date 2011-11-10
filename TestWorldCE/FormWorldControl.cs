@@ -44,7 +44,7 @@ namespace TestWorldCE
 
             if (r.RunMode == RunMode.Virtual)
             {
-                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1b, xMin+0.5f, xMax+0.5f, yMin+0.5f, yMax+0.5f); //korrektur wg. doofen bildern
+                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1a, xMin+0.5f, xMax+0.5f, yMin+0.5f, yMax+0.5f); //korrektur wg. doofen bildern
             }
 
             FormWorldView view = new FormWorldView(xMin, yMin, xMax, yMax);
