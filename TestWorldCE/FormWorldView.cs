@@ -19,6 +19,7 @@ namespace TestWorldCE
             ViewPort p = new ViewPort(xMin, xMax, yMin, yMax);
             this.ViewPort = p;
     
+            
         }
 
 

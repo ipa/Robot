@@ -57,6 +57,6 @@
 
         #endregion
 
-        private RobotView.WorldView worldView1;
+        private RobotView.WorldView worldView1 = new RobotView.WorldView();
     }
 }
