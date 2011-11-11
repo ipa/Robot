@@ -10,8 +10,24 @@ namespace RobotCtrl
 {
     public class RunAroundObstacles : DriveTask
     {
+        public class DoorFoundEventArgs : EventArgs
+        {
+            public int FoundDoor
+            {get;set;}
+        }
+        
         Thread thread;
+        int maxCountDoors = 3;
         bool end = false;
+        int actualDoor;
+
+        public delegate void DoorFoundEventHandler(Object sender, DoorFoundEventArgs e);
+        public delegate void FinishedEventHandler(Object sender);
+        public delegate void StartedEventHandler(Object sender);
+        public event DoorFoundEventHandler DoorFoundEvent;
+        public event FinishedEventHandler FinishedEvent;
+        public event StartedEventHandler StartedEvent;
+
 
         public RunAroundObstacles()
             : base()
@@ -30,17 +46,21 @@ namespace RobotCtrl
             this.end = true;
         }
 
-        int actualDoor;
+        
 
         private void RunAround()
         {
+            StartedEvent(this);
             const int WAITTIME = 100;
+            int countDoors = 0;
             Drive drive = World.Robot.drv;
    
             while (!end)
             {
                 int nextDoor = GetFreeDoor();
                 Debug.WriteLine(string.Format("Free Door: {0}", nextDoor));
+                
+                DoorFoundEvent(this,new DoorFoundEventArgs(){ FoundDoor = nextDoor});
 
                 if (nextDoor != actualDoor)
                 {
@@ -61,9 +81,17 @@ namespace RobotCtrl
                 while (!drive.Done) { Thread.Sleep(10); }
 
                 actualDoor = nextDoor;
+                countDoors++;
+                if (countDoors >= maxCountDoors)
+                {
+                    DriveToPosition(2);
+                    end = true;
+                   
+                }
             }
 
             World.Robot.drv.Halt();
+            FinishedEvent(this);
         }
 
         private int GetFreeDoor()
@@ -91,6 +119,24 @@ namespace RobotCtrl
             {
                 return actualDoor == 3 ? 2 : actualDoor + 1;
             }
+        }
+
+        private void DriveToPosition(int doorPosition)
+        {
+            Drive drive = World.Robot.drv;
+            int diffDoor = doorPosition - actualDoor;
+            float angle = diffDoor < 0 ? -90 : 90;
+
+            drive.RunTurn(angle, this.Speed, this.Acceleration);
+            while (!drive.Done) { Thread.Sleep(10); }
+
+            drive.RunLine(Math.Abs(actualDoor - doorPosition), this.Speed, this.Acceleration);
+            while (!drive.Done) { Thread.Sleep(10); }
+
+            drive.RunTurn(-angle, this.Speed, this.Acceleration);
+            while (!drive.Done) { Thread.Sleep(10); }
+        
+        
         }
     }
 }

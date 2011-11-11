@@ -266,12 +266,12 @@ namespace RobotView
 
                 Robot robot = World.Robot;
 
-                double phi = (robot.Position.Angle) * (Math.PI / 180.0);
 
+                double phi = (robot.Position.Angle) * (Math.PI / 180.0);
                 if (robot != null)
                 {
                     #region Roboter zeichnen
-
+                    
 
                     g.FillEllipse(new SolidBrush(robot.Color),
                                      (int)(this.XtoScreen(robot.Position.X) - (this.WidthToScreen(Constants.Width) / 2.0)),

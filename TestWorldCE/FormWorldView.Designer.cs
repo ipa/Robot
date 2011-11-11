@@ -7,7 +7,7 @@
         /// </summary>
         private System.ComponentModel.IContainer components = null;
         private System.Windows.Forms.MainMenu mainMenu1;
-
+        private RobotView.WorldView worldView1;
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -29,7 +29,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+             
             this.mainMenu1 = new System.Windows.Forms.MainMenu();
+            
             this.worldView1 = new RobotView.WorldView();
             this.SuspendLayout();
             // 
@@ -57,6 +59,6 @@
 
         #endregion
 
-        private RobotView.WorldView worldView1 = new RobotView.WorldView();
+       
     }
 }

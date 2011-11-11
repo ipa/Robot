@@ -17,7 +17,7 @@ namespace TestWorldCE
         private const int xMax = 6;
         private const int yMin = -1;
         private const int yMax = 3;
-
+        FormWorldView view;
 
         public FormWorldControl()
         {
@@ -39,23 +39,31 @@ namespace TestWorldCE
             r.Color = Color.Red;
             World.Robot = r;
 
+            r.SwitchStateChanged += new EventHandler<SwitchEventArgs>(r_SwitchStateChanged);
             RobotConsole rc = r.RobotConsole;
            
             consoleView1.RobotConsole = rc;
 
             if (r.RunMode == RunMode.Virtual)
             {
-                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1a, xMin+0.5f, xMax+0.5f, yMin+0.5f, yMax+0.5f); //korrektur wg. doofen bildern
+                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1c, xMin+0.5f, xMax+0.5f, yMin+0.5f, yMax+0.5f); //korrektur wg. doofen bildern
             }
 
-            FormWorldView view = new FormWorldView(xMin, yMin, xMax, yMax);
+            view = new FormWorldView(xMin, yMin, xMax, yMax);
             view.ViewPort = new RobotView.ViewPort(xMin, xMax, yMin, yMax);
             view.Show();
+            
 
-            BlinkingLed led = rc[BlinkingLeds.BlinkingLed4];
-            led.Frequency = 5;
-            led.LedEnabled = true;
+          
 
+        }
+
+        void r_SwitchStateChanged(object sender, SwitchEventArgs e)
+        {
+            if (e.Swi == Switches.Switch2 && e.SwitchEnabled)
+            {
+                view.SaveImage("image.bmp");
+            }
         }
     }
 }
