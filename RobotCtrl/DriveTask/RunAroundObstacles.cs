@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace RobotCtrl
 {
@@ -16,6 +17,7 @@ namespace RobotCtrl
             : base()
         {
             this.thread = new Thread(new ThreadStart(this.RunAround));
+            this.actualDoor = 2;
         }
 
         public override void Go()
@@ -26,25 +28,39 @@ namespace RobotCtrl
         internal override void Stop()
         {
             this.end = true;
-        } 
+        }
+
+        int actualDoor;
 
         private void RunAround()
         {
             const int WAITTIME = 100;
-            int actualDoor = 2;
-
+            Drive drive = World.Robot.drv;
+   
             while (!end)
             {
-                if (World.Robot.Radar.Distance < 1.0f)
+                int nextDoor = GetFreeDoor();
+                Debug.WriteLine(string.Format("Free Door: {0}", nextDoor));
+
+                if (nextDoor != actualDoor)
                 {
+                    int diffDoor = nextDoor - actualDoor;
+                    float angle = diffDoor < 0 ? -90 : 90;
                     
-                }
-                else
-                {
-                    World.Robot.drv.RunLine(0.5f, this.Speed, this.Acceleration);
+                    drive.RunTurn(angle, this.Speed, this.Acceleration);
+                    while (!drive.Done) { Thread.Sleep(10); }
+                    
+                    drive.RunLine(Math.Abs(actualDoor - nextDoor), this.Speed, this.Acceleration);
+                    while (!drive.Done) { Thread.Sleep(10); }
+
+                    drive.RunTurn(-angle, this.Speed, this.Acceleration);
+                    while (!drive.Done) { Thread.Sleep(10); }
                 }
 
-                Thread.Sleep(WAITTIME);
+                drive.RunLine(2f, this.Speed, this.Acceleration);
+                while (!drive.Done) { Thread.Sleep(10); }
+
+                actualDoor = nextDoor;
             }
 
             World.Robot.drv.Halt();
@@ -52,25 +68,29 @@ namespace RobotCtrl
 
         private int GetFreeDoor()
         {
-            return 0;
-            Drive drive = World.Robot.drv;
-            Radar radar = World.Robot.Radar;
-            RectangleF map = World.ObstacleMap.Area;
-
-
-
-            // turn to door 3
-            float angle = drive.Position.Angle;
-            drive.RunTurn(-angle, this.Speed, this.Acceleration);
-            while (!drive.Done) { Thread.Sleep(10); }
-
-            // look at 0°
-            if (radar.Distance > 2)
+            if (World.Robot.Radar.Distance > 1.5f)
             {
-                return 1;
+                return actualDoor;
             }
 
+            float angle = actualDoor == 3 ? -45f : 45f;
 
+            World.Robot.drv.RunTurn(angle, this.Speed, this.Acceleration);
+            while (!World.Robot.drv.Done) { Thread.Sleep(10); }
+
+            float distance = World.Robot.Radar.Distance;
+
+            World.Robot.drv.RunTurn(-angle, this.Speed, this.Acceleration);
+            while (!World.Robot.drv.Done) { Thread.Sleep(10); }
+
+            if (distance < 1.5f)
+            {
+                return actualDoor == 1 ? 3 : 1;
+            }
+            else
+            {
+                return actualDoor == 3 ? 2 : actualDoor + 1;
+            }
         }
     }
 }
