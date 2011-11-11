@@ -20,6 +20,12 @@ namespace TestWorldCE
             this.ViewPort = p;
     
             
+            
+        }
+
+        public void SaveImage(string filename)
+        {
+            this.worldView1.SaveImage(filename);
         }
 
 

@@ -13,43 +13,62 @@ namespace TestWorldCE
     public partial class FormWorldControl : Form
     {
 
-        private const int xMin = -1;
-        private const int xMax = 6;
-        private const int yMin = -1;
-        private const int yMax = 3;
-
+        private const int xMin = 0;
+        private const int xMax = 3;
+        private const int yMin = 0;
+        private const int yMax = 2;
+        FormWorldView view;
 
         public FormWorldControl()
         {
             InitializeComponent();
-
-            Drive drv = new Drive(RunMode.Virtual);
+            RunMode actualMode = Constants.IsWinCE ? RunMode.Real : RunMode.Virtual;
+            Drive drv = new Drive(actualMode);
+            Robot r = new Robot(actualMode);
+            drv.DriveCtrl.Power = true;
+            drv.DriveCtrl.PowerLeft = true;
+            drv.DriveCtrl.PowerRight = true;
+            
             this.runLineView1.drive = drv;
             this.driveView1.Drive = drv;
             this.trackArc1.drive = drv;
             this.trackTurnView1.drive = drv;
             
-            Robot r = new Robot(RunMode.Virtual);
+            
 
             r.ConfigurePathRecording(0.05f, 0.1f);
 
-            drv.Position = new PositionInfo(0f, 1.5f, 0f);
+            drv.Position = new PositionInfo(0f, 0.75f, 0f);
 
             r.drv = drv;
             r.Color = Color.Red;
             World.Robot = r;
 
+            r.SwitchStateChanged += new EventHandler<SwitchEventArgs>(r_SwitchStateChanged);
             RobotConsole rc = r.RobotConsole;
+           
             consoleView1.RobotConsole = rc;
 
             if (r.RunMode == RunMode.Virtual)
             {
-                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1a, xMin+0.5f, xMax+0.5f, yMin+0.5f, yMax+0.5f); //korrektur wg. doofen bildern
+                World.ObstacleMap = new ObstacleMap(RobotView.Resource.ObstacleMap1c, xMin-0.25f, xMax+0.25f, yMin-0.25f, yMax-0.25f); //korrektur wg. doofen bildern
             }
 
-            FormWorldView view = new FormWorldView(xMin, yMin, xMax, yMax);
+            view = new FormWorldView(xMin, yMin, xMax, yMax);
             view.ViewPort = new RobotView.ViewPort(xMin, xMax, yMin, yMax);
             view.Show();
+            
+
+          
+
+        }
+
+        void r_SwitchStateChanged(object sender, SwitchEventArgs e)
+        {
+            if (e.Swi == Switches.Switch2 && e.SwitchEnabled)
+            {
+                view.SaveImage("image.bmp");
+            }
         }
     }
 }
