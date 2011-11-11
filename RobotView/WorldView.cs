@@ -63,7 +63,14 @@ namespace RobotView
 
         void t_Tick(object sender)
         {
-            this.Invoke(new Action(Invalidate));
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(Invalidate));
+            }
+            else
+            {
+                this.Invalidate();
+            }
         }
         #endregion
         
@@ -109,8 +116,8 @@ namespace RobotView
 
         public void SaveImage(string filename)
         {
+            UpdateView();
             this.pictureBox.Image.Save(filename, System.Drawing.Imaging.ImageFormat.Bmp);
-        
         }
 
         /// <summary>
