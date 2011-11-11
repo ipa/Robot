@@ -20,7 +20,7 @@ namespace RobotCtrl
         int maxCountDoors = 3;
         bool end = false;
         int actualDoor;
-
+        float BoxToMeter = 0.5f;
         public delegate void DoorFoundEventHandler(Object sender, DoorFoundEventArgs e);
         public delegate void FinishedEventHandler(Object sender);
         public delegate void StartedEventHandler(Object sender);
@@ -70,19 +70,19 @@ namespace RobotCtrl
                     drive.RunTurn(angle, this.Speed, this.Acceleration);
                     while (!drive.Done) { Thread.Sleep(10); }
                     
-                    drive.RunLine(Math.Abs(actualDoor - nextDoor), this.Speed, this.Acceleration);
+                    drive.RunLine(Math.Abs(actualDoor - nextDoor)*BoxToMeter, this.Speed, this.Acceleration);
                     while (!drive.Done) { Thread.Sleep(10); }
 
                     drive.RunTurn(-angle, this.Speed, this.Acceleration);
                     while (!drive.Done) { Thread.Sleep(10); }
                 }
 
-                drive.RunLine(2f, this.Speed, this.Acceleration);
+                drive.RunLine(2f*BoxToMeter, this.Speed, this.Acceleration);
                 while (!drive.Done) { Thread.Sleep(10); }
 
                 actualDoor = nextDoor;
                 countDoors++;
-                if (countDoors >= maxCountDoors)
+                if (countDoors >= maxCountDoors) 
                 {
                     DriveToPosition(2);
                     end = true;
@@ -96,7 +96,7 @@ namespace RobotCtrl
 
         private int GetFreeDoor()
         {
-            if (World.Robot.Radar.Distance > 1.5f)
+            if (World.Robot.Radar.Distance > 1.5f*BoxToMeter)
             {
                 return actualDoor;
             }
@@ -111,7 +111,7 @@ namespace RobotCtrl
             World.Robot.drv.RunTurn(-angle, this.Speed, this.Acceleration);
             while (!World.Robot.drv.Done) { Thread.Sleep(10); }
 
-            if (distance < 1.5f)
+            if (distance < 1.5f*BoxToMeter)
             {
                 return actualDoor == 1 ? 3 : 1;
             }
@@ -130,7 +130,7 @@ namespace RobotCtrl
             drive.RunTurn(angle, this.Speed, this.Acceleration);
             while (!drive.Done) { Thread.Sleep(10); }
 
-            drive.RunLine(Math.Abs(actualDoor - doorPosition), this.Speed, this.Acceleration);
+            drive.RunLine(Math.Abs(actualDoor - doorPosition)*BoxToMeter, this.Speed, this.Acceleration);
             while (!drive.Done) { Thread.Sleep(10); }
 
             drive.RunTurn(-angle, this.Speed, this.Acceleration);
