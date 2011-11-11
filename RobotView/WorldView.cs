@@ -27,10 +27,11 @@ namespace RobotView
         private Bitmap plot;
         private Pen penGrid1;
         private Pen penGrid2;
+        private Pen penGrid0;
         private Pen penAngle;
         private Pen penRadar;
         private SolidBrush brushRobot;
-
+        private float BoxToMeters = 0.5f;
         private ViewPort viewPort;
         #endregion
 
@@ -39,7 +40,8 @@ namespace RobotView
         public WorldView()
         {
             penGrid1 = new Pen(Color.Gray, 3);
-            penGrid2 = new Pen(Color.Gray, 1);
+            penGrid0 = new Pen(Color.Gray, 1);
+            penGrid2 = new Pen(Color.Gray, 2);
             penAngle = new Pen(Color.Black, 7);
             penRadar = new Pen(Color.Green, 9);
 
@@ -49,16 +51,19 @@ namespace RobotView
             
             InitializeComponent();
 
-            Timer t = new Timer();
+            System.Threading.Timer t = new System.Threading.Timer(t_Tick, null, 200, 200);
+            
+
+            /*Timer t = new Timer();
             t.Interval = 100;
             t.Tick +=new EventHandler(t_Tick);
-            t.Enabled = true;
+            t.Enabled = true;*/
 
         }
 
-        void t_Tick(object sender, EventArgs e)
+        void t_Tick(object sender)
         {
-            this.Invalidate();
+            this.Invoke(new Action(Invalidate));
         }
         #endregion
         
@@ -248,17 +253,19 @@ namespace RobotView
                 #region Koordinaten-Netz zeichnen
                 // TODO Grid zeichnen
                 // Vertikale Linien die >viewPort.xMin bzw. <viewPort.xMax sind zeichnen...
-                for (int i = (int)Math.Ceiling(viewPort.xMin); i < (int)Math.Floor(this.viewPort.xMax); i++)
+                for (int i = (int)Math.Ceiling(viewPort.xMin); i <( (int)Math.Floor(this.viewPort.xMax))*2; i++)
                 {
-                    Pen pen = i == 0 ? penGrid1 : penGrid2;
-                    g.DrawLine(pen, XtoScreen(i), 0, XtoScreen(i), this.Height);
+                    
+                    Pen pen = i == 0 ? penGrid0 : penGrid2;
+
+                    g.DrawLine(pen, XtoScreen(i/2.0f), 0, XtoScreen(i/2.0f), this.Height);
                 }
 
                 // Horizontale Linien >viewPort.yMin bzw. <viewPort.yMax sind zeichnen...
-                for (int i = (int)Math.Ceiling(viewPort.yMin); i < (int)Math.Floor(this.viewPort.yMax); i++)
+                for (int i = (int)Math.Ceiling(viewPort.yMin); i < ((int)Math.Floor(this.viewPort.yMax))*2; i++)
                 {
                     Pen pen = i == 0 ? penGrid1 : penGrid2;
-                    g.DrawLine(pen, 0, YtoScreen(i), this.Width, YtoScreen(i));
+                    g.DrawLine(pen, 0, YtoScreen(i/2.0f), this.Width, YtoScreen(i/2.0f));
                 }
 
                 #endregion
@@ -266,12 +273,12 @@ namespace RobotView
 
                 Robot robot = World.Robot;
 
-                double phi = (robot.Position.Angle) * (Math.PI / 180.0);
 
+                double phi = (robot.Position.Angle) * (Math.PI / 180.0);
                 if (robot != null)
                 {
                     #region Roboter zeichnen
-
+                    
 
                     g.FillEllipse(new SolidBrush(robot.Color),
                                      (int)(this.XtoScreen(robot.Position.X) - (this.WidthToScreen(Constants.Width) / 2.0)),

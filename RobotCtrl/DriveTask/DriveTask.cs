@@ -9,8 +9,8 @@ namespace RobotCtrl
     {
         protected DriveTask()
         {
-            this.Acceleration = 1f;
-            this.Speed = 1f;
+            this.Acceleration = 0.5f;
+            this.Speed = 0.5f;
         }
 
         public abstract void Go();

@@ -15,6 +15,8 @@ namespace RobotCtrl
         private Timer recordTimer;
         private List<PositionInfo> storedPositions;  //no max size yet
         private object listBlocker = new object();
+        public event EventHandler<SwitchEventArgs> SwitchStateChanged;
+
 
         public Robot(RunMode runMode)
         {
@@ -27,9 +29,10 @@ namespace RobotCtrl
       	    this.RobotConsole = new RobotConsole(runMode);
 
             this.RobotConsole[Switches.Switch1].SwitchStateChanged += SwitchStateChangedRunAroundObstacles;
-            //this.RobotConsole[Switches.Switch2].SwitchStateChanged += SwitchStateChanged;
-            //this.RobotConsole[Switches.Switch3].SwitchStateChanged += SwitchStateChanged;
-            //this.RobotConsole[Switches.Switch4].SwitchStateChanged += SwitchStateChanged;
+            this.RobotConsole[Switches.Switch1].SwitchStateChanged += SwitchStateChangedRedirect;
+            this.RobotConsole[Switches.Switch2].SwitchStateChanged += SwitchStateChangedRedirect;
+            this.RobotConsole[Switches.Switch3].SwitchStateChanged += SwitchStateChangedRedirect;
+            this.RobotConsole[Switches.Switch4].SwitchStateChanged += SwitchStateChangedRedirect;
             
         }
 
@@ -122,6 +125,11 @@ namespace RobotCtrl
 
         public DriveTask ActualDriveTask { get; private set; }
 
+        private void SwitchStateChangedRedirect(object sender, SwitchEventArgs e)
+        {
+            this.SwitchStateChanged(sender, e);
+        }
+
         private void SwitchStateChangedRunAroundObstacles(object sender, SwitchEventArgs e)
         {
             if (e.SwitchEnabled)
@@ -130,7 +138,11 @@ namespace RobotCtrl
                 {
                     this.ActualDriveTask.Stop();
                 }
-                this.ActualDriveTask = new RunAroundObstacles();
+                RunAroundObstacles drvTask = new RunAroundObstacles();
+                drvTask.DoorFoundEvent += new RunAroundObstacles.DoorFoundEventHandler(drvTask_DoorFoundEvent);
+                drvTask.FinishedEvent += new RunAroundObstacles.FinishedEventHandler(drvTask_FinishedEvent);
+                drvTask.StartedEvent += new RunAroundObstacles.StartedEventHandler(drvTask_StartedEvent);
+                this.ActualDriveTask = drvTask;
                 this.ActualDriveTask.Go();
             }
             else
@@ -140,6 +152,33 @@ namespace RobotCtrl
                     this.ActualDriveTask.Stop();
                 }
             }
+        }
+
+        void drvTask_StartedEvent(object sender)
+        {
+            RobotConsole[Leds.Led4].LedEnabled = true;
+        }
+
+        void drvTask_FinishedEvent(object sender)
+        {
+            RobotConsole[BlinkingLeds.BlinkingLed1].LedEnabled = false;
+            RobotConsole[BlinkingLeds.BlinkingLed2].LedEnabled = false;
+            RobotConsole[BlinkingLeds.BlinkingLed3].LedEnabled = false;
+            RobotConsole[Leds.Led4].LedEnabled = false;
+        }
+
+
+
+        void drvTask_DoorFoundEvent(object sender, RunAroundObstacles.DoorFoundEventArgs e)
+        {
+            //disable all blinking LEDS 2-3
+            RobotConsole[BlinkingLeds.BlinkingLed1].LedEnabled = false;
+            RobotConsole[BlinkingLeds.BlinkingLed2].LedEnabled = false;
+            RobotConsole[BlinkingLeds.BlinkingLed3].LedEnabled = false;
+
+            //Enable correct LED
+            RobotConsole[(BlinkingLeds)(3-e.FoundDoor)].LedEnabled = true;
+
         }
 
     }

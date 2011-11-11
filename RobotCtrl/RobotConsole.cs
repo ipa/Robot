@@ -20,6 +20,7 @@ namespace RobotCtrl
 
         #region members
         private Led[] leds;
+        private BlinkingLed[] blinkingLeds;
         private Switch[] switches;
         private DigitalIn digitalIn;
         private DigitalOut digitalOut;
@@ -54,6 +55,13 @@ namespace RobotCtrl
                 leds[i] = new Led(digitalOut,(Leds)i);
             }
 
+            this.blinkingLeds = new BlinkingLed[4];
+            for (int i = 0; i < this.blinkingLeds.Length; i++)
+            {
+                blinkingLeds[i] = new BlinkingLed(digitalOut, (BlinkingLeds)i);
+            }
+
+
             this.switches = new Switch[4];
             for (int i = 0; i < this.switches.Length; i++)
             {
@@ -83,6 +91,17 @@ namespace RobotCtrl
         public Switch this[Switches swi]
         {
             get { return this.switches[(int)swi]; }
+        }
+
+        /// <summary>
+        /// Factory für Blinkingleds...
+        /// </summary>
+        /// <param name="led"></param>
+        /// <returns></returns>
+        public BlinkingLed this[BlinkingLeds led]
+        {
+            get { return this.blinkingLeds[(int)led]; }
+        
         }
         #endregion
 
