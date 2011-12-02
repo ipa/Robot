@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Executor", "HTTP\Executor\E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Http", "HTTP\Http\Http.csproj", "{BE6F8B8C-B279-4B59-87E6-B767BC5E5F6C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bluetooth", "Bluetooth", "{EC579B15-B61E-477F-A8A2-3D022BEDF415}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
