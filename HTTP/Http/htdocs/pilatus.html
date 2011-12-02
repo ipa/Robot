@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//SoftQuad Software//DTD HoTMetaL PRO 5.0::19981217::extensions to HTML 4.0//EN" "hmpro5.dtd">
+ 
+<HTML>
+ 
+<HEAD>
+<TITLE>Pilatus, Bild mit 256 Farben</TITLE>
+<script language="JavaScript">
+    <!--
+    function WertHolen()
+    {
+     var Wert = "";
+     if(document.cookie) 
+     {
+      Wertstart = document.cookie.indexOf("=") + 1;
+      Wertende = document.cookie.indexOf(";");
+      if(Wertende == -1) Wertende = document.cookie.length;
+      Wert = document.cookie.substring(Wertstart,Wertende);
+     }
+     return Wert;
+    }
+
+    function WertSetzen(Bezeichner, Wert, Verfall)
+    {
+     var jetzt = new Date();
+     var Auszeit = new Date(jetzt.getTime() + Verfall);
+     document.cookie = Bezeichner+"="+Wert+"; expires="+Auszeit.toGMTString()+";";
+    }
+
+    function Zaehlerstand() 
+    {
+     var Verfallszeit = 1000*60*60*24*365;
+     var Anzahl = WertHolen();
+     var Zaehler = 0;
+     if(Anzahl != "") Zaehler = parseInt(Anzahl);
+     if(document.cookie)
+     {
+      Zaehler = Zaehler + 1;
+      WertSetzen("Zaehler",Zaehler,Verfallszeit);
+     } 
+     else 
+     {
+      Zaehler = 1;
+      WertSetzen("Zaehler",Zaehler,Verfallszeit);
+     } 
+    alert("Dies ist Ihr " + Zaehler + ". Besuch auf dieser Seite!");
+    }
+    //-->
+   </script>
+</HEAD>
+
+<BODY onLoad="Zaehlerstand()">
+<IMG SRC="pictures/pilatus.jpg" ALT="Pilatus an einem schönen Wintermorgen" WIDTH="640" HEIGHT="480" BORDER="0"> 
+<H6><FONT FACE="Arial"><A HREF="index.html">zur&uuml;ck</A></FONT></H6>
+</BODY>
+</HTML>
+
