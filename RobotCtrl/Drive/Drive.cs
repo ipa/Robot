@@ -162,6 +162,7 @@ namespace RobotCtrl
         /// <param name="length">Strecke, die zurückgelegt werden soll [m]</param>
         /// <param name="speed">die gewünschte Geschwindigkeit [m/s]</param>
         /// <param name="acceleration">die gewünschte Beschleunigung [m/s]</param>
+        [RunMethod]
         public void RunLine(float length, float speed, float acceleration)
         {
             if (disposed) throw new ObjectDisposedException("Drive");
@@ -180,6 +181,7 @@ namespace RobotCtrl
         /// <param name="angle">der gewünschte Winkel [°]</param>
         /// <param name="speed">die gewünschte Geschwindigkeit [m/s]</param>
         /// <param name="acceleration">die gewünschte Beschleunigung [m/s]</param>
+        [RunMethod]
         public void RunTurn(float angle, float speed, float acceleration)
         {
             if (disposed) throw new ObjectDisposedException("Drive");
@@ -199,12 +201,20 @@ namespace RobotCtrl
         /// <param name="angle">der gewünschte Winkel [°]</param>
         /// <param name="speed">die gewünschte Geschwindigkeit [m/s]</param>
         /// <param name="acceleration">die gewünschte Beschleunigung [m/s]</param>
+        [RunMethod]
         public void RunArcLeft(float radius, float angle, float speed, float acceleration)
         {
             if (disposed) throw new ObjectDisposedException("Drive");
             if (track == null) track = new TrackArcLeft(radius, angle, speed, acceleration);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="angle"></param>
+        /// <param name="speed"></param>
+        /// <param name="acceleration"></param>
+        [RunMethod]
         public void RunArcRight(float radius, float angle, float speed, float acceleration)
         {
             if (disposed) throw new ObjectDisposedException("Drive");

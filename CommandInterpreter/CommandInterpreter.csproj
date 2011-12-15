@@ -4,16 +4,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6C18B7E8-5F14-4D59-ADA6-0E51562A8D3D}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <ProjectGuid>{434E1DB4-D897-4123-9B7E-D88CCAD2D082}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestWorldCE</RootNamespace>
-    <AssemblyName>TestWorldCE</AssemblyName>
+    <RootNamespace>CommandInterpreter</RootNamespace>
+    <AssemblyName>CommandInterpreter</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PlatformFamilyName>WindowsCE</PlatformFamilyName>
     <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
     <OSVersion>5.0</OSVersion>
-    <DeployDirSuffix>TestWorldCE</DeployDirSuffix>
+    <DeployDirSuffix>CommandInterpreter</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <NativePlatformName>Windows CE</NativePlatformName>
     <FormFactorID>
@@ -51,75 +51,26 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormWorldControl.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormWorldControl.Designer.cs">
-      <DependentUpon>FormWorldControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FormWorldView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormWorldView.Designer.cs">
-      <DependentUpon>FormWorldView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
+    <Compile Include="DriveCommand.cs" />
+    <Compile Include="IInterpreter.cs" />
+    <Compile Include="Interpreter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormWorldControl.resx">
-      <DependentUpon>FormWorldControl.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormWorldView.resx">
-      <DependentUpon>FormWorldView.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluetooth\BTServer\BTServer.csproj">
-      <Project>{24BF7276-3C8C-4CED-9247-4A5B9AFB18D5}</Project>
-      <Name>BTServer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommandInterpreter\CommandInterpreter.csproj">
-      <Project>{434E1DB4-D897-4123-9B7E-D88CCAD2D082}</Project>
-      <Name>CommandInterpreter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HTTP\Executor\Executor.csproj">
       <Project>{F479BA25-B3B5-44F5-ADD2-95E607303CAB}</Project>
       <Name>Executor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HTTP\Http\Http.csproj">
-      <Project>{BE6F8B8C-B279-4B59-87E6-B767BC5E5F6C}</Project>
-      <Name>Http %28HTTP\Http%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HTTP\ServerPattern\ServerPattern.csproj">
-      <Project>{F3F25C7E-F348-4924-BDB9-73BD2DAC416E}</Project>
-      <Name>ServerPattern</Name>
     </ProjectReference>
     <ProjectReference Include="..\RobotCtrl\RobotCtrl.csproj">
       <Project>{62901C2B-AF62-44CD-A770-D6738FF4F126}</Project>
       <Name>RobotCtrl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RobotIO\RobotIO.csproj">
-      <Project>{DE5E5F68-ECE5-4773-AF67-E55F75A9E21A}</Project>
-      <Name>RobotIO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RobotView\RobotView.csproj">
-      <Project>{38E7D961-0339-491C-A78E-3CAC0DC17FED}</Project>
-      <Name>RobotView</Name>
+    <ProjectReference Include="..\RobotDriveProtocol\RobotDriveProtocol.csproj">
+      <Project>{193AE1D1-3DAF-45A2-A466-A8D4D2E35E6F}</Project>
+      <Name>RobotDriveProtocol</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />

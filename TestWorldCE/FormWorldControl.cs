@@ -7,6 +7,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using RobotCtrl;
+using BTServer;
+using Http;
 
 namespace TestWorldCE
 {
@@ -34,8 +36,6 @@ namespace TestWorldCE
             this.trackArc1.drive = drv;
             this.trackTurnView1.drive = drv;
             
-            
-
             r.ConfigurePathRecording(0.05f, 0.1f);
 
             drv.Position = new PositionInfo(0f, 0.75f, 0f);
@@ -57,10 +57,14 @@ namespace TestWorldCE
             view = new FormWorldView(xMin, yMin, xMax, yMax);
             view.ViewPort = new RobotView.ViewPort(xMin, xMax, yMin, yMax);
             view.Show();
-            
 
-          
+            this.StartServices();
+        }
 
+        private void StartServices()
+        {
+            BluetoothServer.StartServer();
+            HttpServer.StartServer();
         }
 
         void r_SwitchStateChanged(object sender, SwitchEventArgs e)

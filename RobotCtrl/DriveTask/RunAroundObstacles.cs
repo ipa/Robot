@@ -34,6 +34,7 @@ namespace RobotCtrl
         {
             this.thread = new Thread(new ThreadStart(this.RunAround));
             this.actualDoor = 2;
+            World.Robot.drv.Position = new PositionInfo(0f, 0.75f, 0f);
         }
 
         public override void Go()
@@ -44,6 +45,7 @@ namespace RobotCtrl
         internal override void Stop()
         {
             this.end = true;
+            World.Robot.drv.Halt();
         }
 
         

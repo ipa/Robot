@@ -33,7 +33,6 @@ namespace RobotCtrl
             this.RobotConsole[Switches.Switch2].SwitchStateChanged += SwitchStateChangedRedirect;
             this.RobotConsole[Switches.Switch3].SwitchStateChanged += SwitchStateChangedRedirect;
             this.RobotConsole[Switches.Switch4].SwitchStateChanged += SwitchStateChangedRedirect;
-            
         }
 
         public void ResetPath()
@@ -178,8 +177,6 @@ namespace RobotCtrl
 
             //Enable correct LED
             RobotConsole[(BlinkingLeds)(3-e.FoundDoor)].LedEnabled = true;
-
         }
-
     }
 }

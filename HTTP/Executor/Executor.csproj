@@ -4,18 +4,18 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{62901C2B-AF62-44CD-A770-D6738FF4F126}</ProjectGuid>
+    <ProjectGuid>{F479BA25-B3B5-44F5-ADD2-95E607303CAB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RobotCtrl</RootNamespace>
-    <AssemblyName>RobotCtrl</AssemblyName>
+    <RootNamespace>Executor</RootNamespace>
+    <AssemblyName>Executor</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
-    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
-    <OSVersion>5.0</OSVersion>
-    <DeployDirSuffix>RobotCtrl</DeployDirSuffix>
+    <PlatformFamilyName>PocketPC</PlatformFamilyName>
+    <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
+    <OSVersion>5.1</OSVersion>
+    <DeployDirSuffix>Executor</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <NativePlatformName>Windows CE</NativePlatformName>
+    <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
     <FormFactorID>
     </FormFactorID>
   </PropertyGroup>
@@ -48,56 +48,19 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
-    <Compile Include="DriveTask\DriveTask.cs" />
-    <Compile Include="DriveTask\RunAroundObstacles.cs" />
-    <Compile Include="DriveTask\RunSomeMeters.cs" />
-    <Compile Include="Drive\Drive.cs" />
-    <Compile Include="Drive\DriveInfo.cs" />
-    <Compile Include="Drive\Track.cs" />
-    <Compile Include="Drive\TrackArcLeft.cs" />
-    <Compile Include="Drive\TrackArcRight.cs" />
-    <Compile Include="Drive\TrackLine.cs" />
-    <Compile Include="Drive\TrackTurn.cs" />
-    <Compile Include="Engine\DriveCtrl.cs" />
-    <Compile Include="Engine\DriveCtrlHW.cs" />
-    <Compile Include="Engine\DriveCtrlSim.cs" />
-    <Compile Include="Engine\MotorCtrl.cs" />
-    <Compile Include="Engine\MotorCtrlHW.cs" />
-    <Compile Include="Engine\MotorCtrlSim.cs" />
-    <Compile Include="Input\DigitalIn.cs" />
-    <Compile Include="Input\DigitalInHW.cs" />
-    <Compile Include="Input\DigitalInSim.cs" />
-    <Compile Include="IOPort.cs" />
-    <Compile Include="ObstacleMap.cs" />
-    <Compile Include="Output\BlinkingLed.cs" />
-    <Compile Include="Output\DigitalOut.cs" />
-    <Compile Include="Output\DigitalOutHW.cs" />
-    <Compile Include="Output\DigitalOutSim.cs" />
-    <Compile Include="Output\HalbschueException.cs" />
-    <Compile Include="PositionInfo.cs" />
-    <Compile Include="Radar\Radar.cs" />
-    <Compile Include="Radar\RadarSensor.cs" />
-    <Compile Include="Radar\RadarSensorHW.cs" />
-    <Compile Include="Radar\RadarSensorSim.cs" />
-    <Compile Include="Robot.cs" />
-    <Compile Include="RobotConsole.cs" />
-    <Compile Include="RobotControls.cs" />
-    <Compile Include="Input\Switch.cs" />
-    <Compile Include="Input\SwitchEventArgs.cs" />
-    <Compile Include="Output\Led.cs" />
-    <Compile Include="Output\LedEventArgs.cs" />
+    <Compile Include="IExecutor.cs" />
+    <Compile Include="IQueue.cs" />
+    <Compile Include="PlainThreadExecutor.cs" />
+    <Compile Include="PlainWorkerPool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunMethod.cs" />
-    <Compile Include="World.cs" />
+    <Compile Include="RingBufferArray.cs" />
+    <Compile Include="WorkerPool.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>
