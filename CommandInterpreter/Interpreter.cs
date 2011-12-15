@@ -31,20 +31,19 @@ namespace CommandInterpreter
 
         private void ExecuteCommand(Command cmd)
         {
-
             StreamWriter writer = null;
             try
             {
                 String path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase), "htdocs");
                 path = Path.Combine(path, "drive.txt");
-                FileStream f = File.Open(path, FileMode.OpenOrCreate);
-                writer = new StreamWriter(f);
+                writer = File.AppendText(path);
                 
                 Drive drive = World.Robot.drv;
                 MethodInfo methodInfo = drive.GetType().GetMethod(cmd.Method, cmd.GetTypes().ToArray());
                 if (methodInfo != null && methodInfo.GetCustomAttributes(typeof(RunMethod), false).Length == 1)
                 {
                     methodInfo.Invoke(drive, cmd.GetValues().ToArray());
+                    Thread.Sleep(100);
                     while (!drive.Done) { Thread.Sleep(20); }
                     writer.WriteLine(cmd.ToString());
                 }
