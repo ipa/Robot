@@ -23,6 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWorldCE", "TestWorldCE\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWorldWin7", "TestWorldWin7\TestWorldWin7.csproj", "{19E6DA8F-65D6-473D-A590-08C9DC4EF849}"
 EndProject
+<<<<<<< HEAD
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BluetoothClient", "BluetoothClient\BluetoothClient.csproj", "{A7580308-DA2A-49E3-9EB5-366158D3B563}"
+=======
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HTTP", "HTTP", "{9AB741FD-78B6-4CC6-B517-0238DE880E37}"
 	ProjectSection(SolutionItems) = preProject
 		SmartDeviceTestRun.testrunConfig = SmartDeviceTestRun.testrunConfig
@@ -50,6 +53,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		Robot.vsmdi = Robot.vsmdi
 	EndProjectSection
+>>>>>>> 5dfd14210610209d0dae0e52b8c7e1968a8913f2
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -112,6 +116,12 @@ Global
 		{19E6DA8F-65D6-473D-A590-08C9DC4EF849}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19E6DA8F-65D6-473D-A590-08C9DC4EF849}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19E6DA8F-65D6-473D-A590-08C9DC4EF849}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+		{A7580308-DA2A-49E3-9EB5-366158D3B563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7580308-DA2A-49E3-9EB5-366158D3B563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7580308-DA2A-49E3-9EB5-366158D3B563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7580308-DA2A-49E3-9EB5-366158D3B563}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
 		{F3F25C7E-F348-4924-BDB9-73BD2DAC416E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3F25C7E-F348-4924-BDB9-73BD2DAC416E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3F25C7E-F348-4924-BDB9-73BD2DAC416E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -142,6 +152,7 @@ Global
 		{A2F3D0B8-DFD8-49CB-ABC9-F2B54837FA65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2F3D0B8-DFD8-49CB-ABC9-F2B54837FA65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2F3D0B8-DFD8-49CB-ABC9-F2B54837FA65}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> 5dfd14210610209d0dae0e52b8c7e1968a8913f2
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
