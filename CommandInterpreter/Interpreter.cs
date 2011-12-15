@@ -15,44 +15,51 @@ namespace CommandInterpreter
 {
     public class Interpreter : IInterpreter
     {
-        private static IExecutor executor;
-        
-        static Interpreter()
-        {
-            executor = new WorkerPool(1);
-        }
-        
         public void InterpretMessage(string message)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Command));
-            XmlReader xmlReader = XmlReader.Create(new StringReader(message));
-            if (serializer.CanDeserialize(xmlReader))
+            List<Command> commands = CommandSerializer.Deserialize(message);
+            if (commands != null)
             {
-                object o = serializer.Deserialize(xmlReader);
-                if (o is Command)
-                {
-                    Command cmd = (Command)o;
-                    this.InterpretCommand(cmd);
-                }
-            }
-            else
-            {
-                Console.WriteLine("could not deserialize message");
+                this.InterpretCommand(commands);
             }
         }
 
-        public void InterpretCommand(Command cmd)
+        public void InterpretCommand(List<Command> cmds)
         {
-            Drive drive = World.Robot.drv;
-            MethodInfo methodInfo = drive.GetType().GetMethod(cmd.Method, cmd.GetTypes().ToArray());
-            if (methodInfo != null && methodInfo.GetCustomAttributes(typeof(RunMethod), false).Length == 1)
+            cmds.ForEach(el => this.ExecuteCommand(el));
+        }
+
+        private void ExecuteCommand(Command cmd)
+        {
+
+            StreamWriter writer = null;
+            try
             {
-                ParametrizedThreadStart driveCmd = new ParametrizedThreadStart(methodInfo.Invoke, drive, cmd.GetValues().ToArray());
-                executor.Execute(new ThreadStart(driveCmd.Start));
+                String path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase), "htdocs");
+                path = Path.Combine(path, "drive.txt");
+                FileStream f = File.Open(path, FileMode.OpenOrCreate);
+                writer = new StreamWriter(f);
+                
+                Drive drive = World.Robot.drv;
+                MethodInfo methodInfo = drive.GetType().GetMethod(cmd.Method, cmd.GetTypes().ToArray());
+                if (methodInfo != null && methodInfo.GetCustomAttributes(typeof(RunMethod), false).Length == 1)
+                {
+                    methodInfo.Invoke(drive, cmd.GetValues().ToArray());
+                    while (!drive.Done) { Thread.Sleep(20); }
+                    writer.WriteLine(cmd.ToString());
+                }
+                else
+                {
+                    Console.WriteLine("could not interpret command");
+                }
             }
-            else
+            finally
             {
-                Console.WriteLine("could not interpret command");
+                if (writer != null)
+                {
+                    writer.Flush();
+                    writer.Close();
+                }
             }
         }
     }
