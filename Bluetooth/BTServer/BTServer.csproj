@@ -4,16 +4,16 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{193AE1D1-3DAF-45A2-A466-A8D4D2E35E6F}</ProjectGuid>
+    <ProjectGuid>{24BF7276-3C8C-4CED-9247-4A5B9AFB18D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RobotDriveProtocol</RootNamespace>
-    <AssemblyName>RobotDriveProtocol</AssemblyName>
+    <RootNamespace>BTServer</RootNamespace>
+    <AssemblyName>BTServer</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PlatformFamilyName>WindowsCE</PlatformFamilyName>
     <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
     <OSVersion>5.0</OSVersion>
-    <DeployDirSuffix>RobotDriveProtocol</DeployDirSuffix>
+    <DeployDirSuffix>BTServer</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <NativePlatformName>Windows CE</NativePlatformName>
     <FormFactorID>
@@ -45,6 +45,10 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="InTheHand.Net.Personal, Version=3.0.2.0, Culture=neutral, PublicKeyToken=ea38caa273134499, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TA_LibraryCE\InTheHand.Net.Personal.dll</HintPath>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,11 +56,30 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TA_BluetoothCE, Version=1.0.4163.18803, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\TA_LibraryCE\TA_BluetoothCE.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="CommandParam.cs" />
+    <Compile Include="BluetoothHandler.cs" />
+    <Compile Include="BluetoothNotStartedException.cs" />
+    <Compile Include="BluetoothServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommandInterpreter\CommandInterpreter.csproj">
+      <Project>{434E1DB4-D897-4123-9B7E-D88CCAD2D082}</Project>
+      <Name>CommandInterpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HTTP\Executor\Executor.csproj">
+      <Project>{F479BA25-B3B5-44F5-ADD2-95E607303CAB}</Project>
+      <Name>Executor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HTTP\ServerPattern\ServerPattern.csproj">
+      <Project>{F3F25C7E-F348-4924-BDB9-73BD2DAC416E}</Project>
+      <Name>ServerPattern</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>

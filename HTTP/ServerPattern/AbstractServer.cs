@@ -17,7 +17,7 @@ namespace ServerPattern
         public const int DEFAULTPORT = 4711;
         public const string DEFAULTHOST = "localhost";
 
-        protected void Run() {
+        virtual protected void Run() {
             try {
                 IExecutor executor = CreateExecutor();
                 Socket listen = CreateServerSocket();
@@ -70,6 +70,9 @@ namespace ServerPattern
         public string GetHost() {
             return host;
         }
+
+        protected bool Running
+        { get { return this.running; } }
 
         abstract protected AbstractHandler CreateHandler(Socket client);
     }

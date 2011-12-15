@@ -16,7 +16,7 @@ namespace Http
 	 * Zudem kann der Server mit Hilfe der Program Parameter das
 	 * Startvereichnis und -dokument konfiguriert werden.
 	*/
-	class HttpServer : AbstractServer
+	public class HttpServer : AbstractServer
 	{
 		private int call = 0;
 
@@ -36,18 +36,18 @@ namespace Http
 			return new WorkerPool(20);
 		}
 
+        public static void StartServer()
+        {
+            int port = 8080;
+
+            new HttpServer().Start(port);
+            Console.WriteLine("HTTP server running on port: " + port);
+            Console.WriteLine("htdocs folder: " + htdocs);
+        }
+
 		public static void Main(String[] args) 
 		{
-			int port = 8080;
-			if (args.Length > 0)
-			{
-				port = Int32.Parse(args[0]);
-				htdocs = args[1];
-				startdoc = args[2];
-			}
-			new HttpServer().Start(port);
-			Console.WriteLine("HTTP server running on port: " + port);
-            Console.WriteLine("htdocs folder: " + htdocs);
+            StartServer();
 		}
 	}
 }
