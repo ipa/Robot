@@ -2,6 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RobotDriveProtocol;
 using RobotCtrl;
+using System.Xml.Serialization;
+using System.Xml;
+using System.IO;
+using System;
+using System.Diagnostics;
 
 namespace CommandInterpreterTest
 {
@@ -105,16 +110,42 @@ namespace CommandInterpreterTest
             //Interpreter_Accessor target = new Interpreter_Accessor(); // TODO: Initialize to an appropriate value
             Command cmd = new Command(); // TODO: Initialize to an appropriate value
             cmd.Method = "RunLine";//RunLine(float length, float speed, float acceleration)
-            cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
-            cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
-            cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
             //cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
+            //cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
+            //cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
+            ////cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
 
             interpreter.InterpretCommand(cmd);
 
             //target.InterpretCommand(cmd);
 
             Assert.Inconclusive("A method that does not return a value cannot be verified.");
+        }
+
+        [TestMethod()]
+        public void CommandTest()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Command));
+            XmlWriter xmlWriter = XmlWriter.Create(new StringWriter());
+            Command cmd = new Command(); // TODO: Initialize to an appropriate value
+            cmd.Method = "RunLine";//RunLine(float length, float speed, float acceleration)
+            cmd.Parameters.Add(1.0f);
+            cmd.Parameters.Add(1.0f);
+            cmd.Parameters.Add(1.0f);
+
+            serializer.Serialize(xmlWriter, cmd);
+
+            //XmlSerializer serializer = new XmlSerializer(typeof(Command));
+            XmlReader xmlReader = XmlReader.Create(new StringReader(message));
+            if (serializer.CanDeserialize(xmlReader))
+            {
+                object o = serializer.Deserialize(xmlReader);
+                if (o is Command)
+                {
+                    Command cmd = (Command)o;
+                    this.InterpretCommand(cmd);
+                }
+            }
         }
     }
 }
