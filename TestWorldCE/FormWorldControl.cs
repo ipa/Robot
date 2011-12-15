@@ -16,9 +16,9 @@ namespace TestWorldCE
     {
 
         private const int xMin = 0;
-        private const int xMax = 3;
+        private const int xMax = 10;
         private const int yMin = 0;
-        private const int yMax = 2;
+        private const int yMax = 10;
         FormWorldView view;
 
         public FormWorldControl()
@@ -64,7 +64,7 @@ namespace TestWorldCE
         private void StartServices()
         {
             BluetoothServer.StartServer();
-            HttpServer.StartServer();
+            //HttpServer.StartServer();
         }
 
         void r_SwitchStateChanged(object sender, SwitchEventArgs e)

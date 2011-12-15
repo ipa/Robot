@@ -50,33 +50,42 @@ namespace BTServer
 
         private BluetoothService CreateService()
         {
-            BluetoothService service;
-            // check if Bluetooth-Stick is available
-            if (BluetoothRadio.IsSupported)
-            {
-                // Device visible for others
-                // RadioMode setting not supported as long as the
-                // WinCE image doesn't include the BthUtil.dll
-                //BluetoothRadio.PrimaryRadio.Mode = 
-                //     BluetoothRadioMode.Discoverable;
+            BluetoothService service = null;
 
-                // set device Name
-                BluetoothRadio.PrimaryRadio.Name = "AbflussRobot";
-                // desired service
-                Guid serviceId = BluetoothServiceList.Robot09;
-                //Guid serviceId = new Guid("{FB4B43E4-0328-4056-82A5-7E03BE347082}");
-
-                // start new service
-                service = new BluetoothService();
-                service.CreateService(serviceId);
-                Console.WriteLine("Service " + serviceId.ToString() + " started.");
-            }
-            else
+            try
             {
-                Console.WriteLine("No Bluetooth-Stick is available");
-                throw new BluetoothNotStartedException();
-                return null;
+                // check if Bluetooth-Stick is available
+                if (BluetoothRadio.IsSupported)
+                {
+                    // Device visible for others
+                    // RadioMode setting not supported as long as the
+                    // WinCE image doesn't include the BthUtil.dll
+                    //BluetoothRadio.PrimaryRadio.Mode = 
+                    //     BluetoothRadioMode.Discoverable;
+
+                    // set device Name
+                    BluetoothRadio.PrimaryRadio.Name = "AbflussRobot";
+                    // desired service
+                    Guid serviceId = BluetoothServiceList.Robot09;
+                    //Guid serviceId = new Guid("{FB4B43E4-0328-4056-82A5-7E03BE347082}");
+
+                    // start new service
+                    service = new BluetoothService();
+                    service.CreateService(serviceId);
+                    Console.WriteLine("Service " + serviceId.ToString() + " started.");
+                }
+                else
+                {
+                    Console.WriteLine("No Bluetooth-Stick is available");
+                    throw new BluetoothNotStartedException();
+                    return null;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
             return service;
         }
 
