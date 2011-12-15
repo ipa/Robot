@@ -9,31 +9,31 @@ namespace RobotDriveProtocol
     {
         public Command()
         {
-            this.Parameters = new List<CommandParam>();
+            this.Parameters = new List<Object>();
         }
 
         public string Method;
 
-        public List<CommandParam> Parameters;
+        public List<Object> Parameters;
 
         public List<Type> GetTypes()
         {
             List<Type> types = new List<Type>();
-            this.Parameters.ForEach(el => types.Add(el.Type));
+            this.Parameters.ForEach(el => types.Add(el.GetType()));
             return types;
         }
 
         public List<object> GetValues()
         {
             List<object> parameters = new List<object>();
-            this.Parameters.ForEach(el => parameters.Add(el.Parameter));
+            this.Parameters.ForEach(el => parameters.Add(el));
             return parameters;
         }
 
         public override string ToString()
         {
             string args = "";
-            //this.Parameters.Values.ToList().ForEach(el => args += (el.ToString() + " : "));
+            this.GetValues().ForEach(el => args += (el.ToString() + " : "));
             return string.Format("{0} - {1}", this.Method, args);
         }
     }
