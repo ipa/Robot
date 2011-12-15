@@ -109,6 +109,7 @@ namespace RobotView
 
         public void SaveImage(string filename)
         {
+            UpdateView();
             this.pictureBox.Image.Save(filename, System.Drawing.Imaging.ImageFormat.Bmp);
         
         }
