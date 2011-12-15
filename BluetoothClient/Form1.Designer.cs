@@ -52,6 +52,7 @@
             this.txtTrackArcAngle = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.lstBluetooth = new System.Windows.Forms.ListBox();
             this.tabControl.SuspendLayout();
             this.tpgTrackLine.SuspendLayout();
             this.tpgTrackTurn.SuspendLayout();
@@ -293,11 +294,20 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // lstBluetooth
+            // 
+            this.lstBluetooth.FormattingEnabled = true;
+            this.lstBluetooth.Location = new System.Drawing.Point(1, 381);
+            this.lstBluetooth.Name = "lstBluetooth";
+            this.lstBluetooth.Size = new System.Drawing.Size(289, 238);
+            this.lstBluetooth.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 481);
+            this.ClientSize = new System.Drawing.Size(1101, 622);
+            this.Controls.Add(this.lstBluetooth);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.button1);
@@ -344,6 +354,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton rbnTrackArcRight;
         private System.Windows.Forms.RadioButton rbnTrackArcLeft;
+        private System.Windows.Forms.ListBox lstBluetooth;
     }
 }
 

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using RobotDriveProtocol;
+using TA.Bluetooth;
+using System.IO;
 
 namespace BluetoothClient
 {
@@ -32,31 +34,42 @@ namespace BluetoothClient
                 //RunLine(float length, float speed, float acceleration)
                 
                 cmd.Method = "RunLine";
-                cmd.Parameters(new CommandParam()
-                {
-                    Parameter = float.Parse(txtTrackLineLength.Text),
-                    Type = typeof(float)
-                });
-                cmd.Parameters(new CommandParam()
-                {
-                    Parameter = 1.0f,
-                    Type = typeof(float)
-                });
-                cmd.Parameters(new CommandParam()
-                {
-                    Parameter = 1.0f,
-                    Type = typeof(float)
-                });
+                cmd.Parameters.Add(float.Parse(txtTrackLineLength.Text));
+
+                cmd.Parameters.Add(1.0f);
+                
+                cmd.Parameters.Add(1.0f);
             
             }
             else if (tabControl.SelectedTab == tpgTrackTurn)
             {
-                lstCommands.Items.Add("trackturn");
+                // RunTurn(float angle, float speed, float acceleration)
+                cmd.Method = "RunTurn";
+                cmd.Parameters.Add(float.Parse(txtTrackTurnAngle.Text));
+
+                cmd.Parameters.Add(1.0f);
+
+                cmd.Parameters.Add(1.0f);
             
             }
             else if (tabControl.SelectedTab == tpgTrackArc)
             {
-                lstCommands.Items.Add("trackarc");
+                //     public void RunArcLeft(float radius, float angle, float speed, float acceleration)
+       
+                if (rbnTrackArcLeft.Checked)
+                {
+                    cmd.Method = "RunArcLeft";
+                }
+                else if (rbnTrackArcRight.Checked)
+                {
+                    cmd.Method = "RunArcRight";
+                }
+
+                cmd.Parameters.Add(float.Parse(txtTrackArcRadius.Text));
+                cmd.Parameters.Add(float.Parse(txtTrackArcAngle.Text));
+                cmd.Parameters.Add(1.0f);
+                cmd.Parameters.Add(1.0f);
+
             }
 
             lstCommands.Items.Add(cmd);
@@ -67,10 +80,70 @@ namespace BluetoothClient
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public  BluetoothDevice DiscoverDev(Guid service)
         {
-            List<Command> elCommandos = lstCommands.Items.OfType<Command>().ToList();
+            // search for reachable devices
+            BluetoothDiscovery discovery = new BluetoothDiscovery();
+
+            // Search for maximum 12 devices
+            // Exclude paired devices
+            // Exclude remebered devices
+            // Include unknown devices
+            BluetoothDeviceCollection bdc =
+                discovery.DiscoverDevices(12,true,true,true);
             
+            lstBluetooth.Items.Clear();
+            foreach (BluetoothDevice device in bdc)
+            {
+                if (device.HasService(service))
+                {
+                 //   MessageBox.Show(device.Name + ";" + device.DeviceAddress);
+                    lstBluetooth.Items.Add("+ " + device.DeviceAddress);
+                    return device;
+                }
+                else
+                {
+                    lstBluetooth.Items.Add("- " + device.DeviceAddress);
+                }
+            }
+            MessageBox.Show("Required service does not exist on target");
+            return null;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {try
+                {
+            Guid service = BluetoothServiceList.Robot09;
+            List<Command> elCommandos = lstCommands.Items.OfType<Command>().ToList();
+            BluetoothDevice device = DiscoverDev(service);
+
+            if (device != null)
+            {
+                
+                    // connect to desired service
+                    TA.Bluetooth.BluetoothClient bc = device.Connect(service);
+
+                    // read transmitted data
+                    
+                    StreamWriter sw = new StreamWriter(bc.GetStream());
+                    // request
+                    
+                    sw.WriteLine(CommandSerializer.Serialize(elCommandos));
+                    sw.Flush();
+                    // print 
+                    bc.Close();
+                    MessageBox.Show("Data sent!");
+               
+            }
+            else
+            {
+                MessageBox.Show("No Device found");
+            }
+                }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+        }
         }
     }
 }
