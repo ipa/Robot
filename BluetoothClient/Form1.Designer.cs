@@ -52,7 +52,7 @@
             this.txtTrackArcAngle = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.lstBluetooth = new System.Windows.Forms.ListBox();
+            this.cbxRobot = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tpgTrackLine.SuspendLayout();
             this.tpgTrackTurn.SuspendLayout();
@@ -294,20 +294,20 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // lstBluetooth
+            // cbxRobot
             // 
-            this.lstBluetooth.FormattingEnabled = true;
-            this.lstBluetooth.Location = new System.Drawing.Point(1, 381);
-            this.lstBluetooth.Name = "lstBluetooth";
-            this.lstBluetooth.Size = new System.Drawing.Size(289, 238);
-            this.lstBluetooth.TabIndex = 6;
+            this.cbxRobot.FormattingEnabled = true;
+            this.cbxRobot.Location = new System.Drawing.Point(574, 446);
+            this.cbxRobot.Name = "cbxRobot";
+            this.cbxRobot.Size = new System.Drawing.Size(367, 21);
+            this.cbxRobot.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1101, 622);
-            this.Controls.Add(this.lstBluetooth);
+            this.Controls.Add(this.cbxRobot);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.button1);
@@ -316,6 +316,7 @@
             this.Controls.Add(this.lstCommands);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl.ResumeLayout(false);
             this.tpgTrackLine.ResumeLayout(false);
             this.tpgTrackLine.PerformLayout();
@@ -354,7 +355,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RadioButton rbnTrackArcRight;
         private System.Windows.Forms.RadioButton rbnTrackArcLeft;
-        private System.Windows.Forms.ListBox lstBluetooth;
+        private System.Windows.Forms.ComboBox cbxRobot;
     }
 }
 
