@@ -33,7 +33,7 @@ namespace RobotDriveProtocol
         public override string ToString()
         {
             string args = "";
-            //this.Parameters.Values.ToList().ForEach(el => args += (el.ToString() + " : "));
+            this.GetValues().ForEach(el => args += (el.ToString() + " : "));
             return string.Format("{0} - {1}", this.Method, args);
         }
     }

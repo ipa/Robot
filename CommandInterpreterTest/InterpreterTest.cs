@@ -126,7 +126,8 @@ namespace CommandInterpreterTest
         public void CommandTest()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Command));
-            XmlWriter xmlWriter = XmlWriter.Create(new StringWriter());
+            StringWriter stringWriter = new StringWriter();
+            XmlWriter xmlWriter = XmlWriter.Create(stringWriter);
             Command cmd = new Command(); // TODO: Initialize to an appropriate value
             cmd.Method = "RunLine";//RunLine(float length, float speed, float acceleration)
             cmd.Parameters.Add(1.0f);
@@ -134,16 +135,20 @@ namespace CommandInterpreterTest
             cmd.Parameters.Add(1.0f);
 
             serializer.Serialize(xmlWriter, cmd);
+            xmlWriter.Flush();
+
+            Debug.WriteLine(stringWriter.ToString());
 
             //XmlSerializer serializer = new XmlSerializer(typeof(Command));
-            XmlReader xmlReader = XmlReader.Create(new StringReader(message));
+            StringReader stringReader = new StringReader(stringWriter.ToString());
+            XmlReader xmlReader = XmlReader.Create(stringReader);
             if (serializer.CanDeserialize(xmlReader))
             {
                 object o = serializer.Deserialize(xmlReader);
                 if (o is Command)
                 {
-                    Command cmd = (Command)o;
-                    this.InterpretCommand(cmd);
+                    Command cmdDeserialized = (Command)o;
+                    Debug.WriteLine(cmdDeserialized.ToString());
                 }
             }
         }
