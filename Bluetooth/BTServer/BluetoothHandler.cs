@@ -20,9 +20,14 @@ namespace BTServer
         private StreamWriter sw;
         private Socket client;
 
-        private IInterpreter interpreter;
+        private static IInterpreter interpreter;
 
         private string request;
+
+        static BluetoothHandler()
+        {
+            interpreter = new Interpreter();
+        }
 
         public BluetoothHandler(Socket client, int id)
             : base(client)
@@ -32,7 +37,6 @@ namespace BTServer
 			nws = new NetworkStream(client, true);
 			sr = new StreamReader(nws);
 			sw = new StreamWriter(nws);
-            interpreter = new Interpreter();
 		}
 
         protected override bool ReadRequest()
