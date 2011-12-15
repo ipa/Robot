@@ -34,24 +34,24 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tpgTrackLine = new System.Windows.Forms.TabPage();
-            this.tpgTrackTurn = new System.Windows.Forms.TabPage();
-            this.tpgTrackArc = new System.Windows.Forms.TabPage();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.txtTrackLineLength = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tpgTrackTurn = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
             this.txtTrackTurnAngle = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtTrackArcAngle = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.tpgTrackArc = new System.Windows.Forms.TabPage();
+            this.rbnTrackArcRight = new System.Windows.Forms.RadioButton();
+            this.rbnTrackArcLeft = new System.Windows.Forms.RadioButton();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.txtTrackArcRadius = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.rbnTrackArcLeft = new System.Windows.Forms.RadioButton();
-            this.rbnTrackArcRight = new System.Windows.Forms.RadioButton();
+            this.txtTrackArcAngle = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tpgTrackLine.SuspendLayout();
             this.tpgTrackTurn.SuspendLayout();
@@ -93,6 +93,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Send Commands";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl
             // 
@@ -118,6 +119,31 @@
             this.tpgTrackLine.Text = "TrackLine";
             this.tpgTrackLine.UseVisualStyleBackColor = true;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(203, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(15, 13);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "m";
+            // 
+            // txtTrackLineLength
+            // 
+            this.txtTrackLineLength.Location = new System.Drawing.Point(69, 23);
+            this.txtTrackLineLength.Name = "txtTrackLineLength";
+            this.txtTrackLineLength.Size = new System.Drawing.Size(127, 20);
+            this.txtTrackLineLength.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Length";
+            // 
             // tpgTrackTurn
             // 
             this.tpgTrackTurn.Controls.Add(this.label8);
@@ -130,6 +156,31 @@
             this.tpgTrackTurn.TabIndex = 1;
             this.tpgTrackTurn.Text = "TrackTurn";
             this.tpgTrackTurn.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(208, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(11, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "°";
+            // 
+            // txtTrackTurnAngle
+            // 
+            this.txtTrackTurnAngle.Location = new System.Drawing.Point(75, 17);
+            this.txtTrackTurnAngle.Name = "txtTrackTurnAngle";
+            this.txtTrackTurnAngle.Size = new System.Drawing.Size(127, 20);
+            this.txtTrackTurnAngle.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 25);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Angle";
             // 
             // tpgTrackArc
             // 
@@ -151,63 +202,54 @@
             this.tpgTrackArc.UseVisualStyleBackColor = true;
             this.tpgTrackArc.Click += new System.EventHandler(this.tbgTrackArc_Click);
             // 
-            // btnAdd
+            // rbnTrackArcRight
             // 
-            this.btnAdd.Location = new System.Drawing.Point(581, 381);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(125, 23);
-            this.btnAdd.TabIndex = 5;
-            this.btnAdd.Text = "Add Command";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.rbnTrackArcRight.AutoSize = true;
+            this.rbnTrackArcRight.Location = new System.Drawing.Point(72, 133);
+            this.rbnTrackArcRight.Name = "rbnTrackArcRight";
+            this.rbnTrackArcRight.Size = new System.Drawing.Size(50, 17);
+            this.rbnTrackArcRight.TabIndex = 12;
+            this.rbnTrackArcRight.TabStop = true;
+            this.rbnTrackArcRight.Text = "Right";
+            this.rbnTrackArcRight.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // rbnTrackArcLeft
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Length";
+            this.rbnTrackArcLeft.AutoSize = true;
+            this.rbnTrackArcLeft.Location = new System.Drawing.Point(72, 110);
+            this.rbnTrackArcLeft.Name = "rbnTrackArcLeft";
+            this.rbnTrackArcLeft.Size = new System.Drawing.Size(43, 17);
+            this.rbnTrackArcLeft.TabIndex = 11;
+            this.rbnTrackArcLeft.TabStop = true;
+            this.rbnTrackArcLeft.Text = "Left";
+            this.rbnTrackArcLeft.UseVisualStyleBackColor = true;
             // 
-            // txtTrackLineLength
+            // label10
             // 
-            this.txtTrackLineLength.Location = new System.Drawing.Point(69, 23);
-            this.txtTrackLineLength.Name = "txtTrackLineLength";
-            this.txtTrackLineLength.Size = new System.Drawing.Size(127, 20);
-            this.txtTrackLineLength.TabIndex = 1;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(12, 110);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(49, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Direction";
             // 
-            // txtTrackTurnAngle
+            // label9
             // 
-            this.txtTrackTurnAngle.Location = new System.Drawing.Point(75, 17);
-            this.txtTrackTurnAngle.Name = "txtTrackTurnAngle";
-            this.txtTrackTurnAngle.Size = new System.Drawing.Size(127, 20);
-            this.txtTrackTurnAngle.TabIndex = 3;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(205, 26);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(11, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "°";
             // 
-            // label3
+            // label7
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Angle";
-            // 
-            // txtTrackArcAngle
-            // 
-            this.txtTrackArcAngle.Location = new System.Drawing.Point(72, 22);
-            this.txtTrackArcAngle.Name = "txtTrackArcAngle";
-            this.txtTrackArcAngle.Size = new System.Drawing.Size(127, 20);
-            this.txtTrackArcAngle.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 26);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(34, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Angle";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(205, 67);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(15, 13);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "m";
             // 
             // txtTrackArcRadius
             // 
@@ -225,72 +267,31 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Radius";
             // 
-            // label6
+            // txtTrackArcAngle
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(203, 29);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "m";
+            this.txtTrackArcAngle.Location = new System.Drawing.Point(72, 22);
+            this.txtTrackArcAngle.Name = "txtTrackArcAngle";
+            this.txtTrackArcAngle.Size = new System.Drawing.Size(127, 20);
+            this.txtTrackArcAngle.TabIndex = 5;
             // 
-            // label7
+            // label4
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(205, 67);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(15, 13);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "m";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(9, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Angle";
             // 
-            // label8
+            // btnAdd
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(208, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(11, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "°";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(205, 26);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(11, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "°";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(12, 110);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 13);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Direction";
-            // 
-            // rbnTrackArcLeft
-            // 
-            this.rbnTrackArcLeft.AutoSize = true;
-            this.rbnTrackArcLeft.Location = new System.Drawing.Point(72, 110);
-            this.rbnTrackArcLeft.Name = "rbnTrackArcLeft";
-            this.rbnTrackArcLeft.Size = new System.Drawing.Size(43, 17);
-            this.rbnTrackArcLeft.TabIndex = 11;
-            this.rbnTrackArcLeft.TabStop = true;
-            this.rbnTrackArcLeft.Text = "Left";
-            this.rbnTrackArcLeft.UseVisualStyleBackColor = true;
-            // 
-            // rbnTrackArcRight
-            // 
-            this.rbnTrackArcRight.AutoSize = true;
-            this.rbnTrackArcRight.Location = new System.Drawing.Point(72, 133);
-            this.rbnTrackArcRight.Name = "rbnTrackArcRight";
-            this.rbnTrackArcRight.Size = new System.Drawing.Size(50, 17);
-            this.rbnTrackArcRight.TabIndex = 12;
-            this.rbnTrackArcRight.TabStop = true;
-            this.rbnTrackArcRight.Text = "Right";
-            this.rbnTrackArcRight.UseVisualStyleBackColor = true;
+            this.btnAdd.Location = new System.Drawing.Point(581, 381);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(125, 23);
+            this.btnAdd.TabIndex = 5;
+            this.btnAdd.Text = "Add Command";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // Form1
             // 
