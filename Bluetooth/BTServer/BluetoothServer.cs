@@ -70,7 +70,7 @@ namespace BTServer
                 // set device Name
                 BluetoothRadio.PrimaryRadio.Name = "AbflussRobot";
                 // desired service
-                Guid serviceId = BluetoothServiceList.Robot09;
+                Guid serviceId = BluetoothServiceList.Robot06;
                 //Guid serviceId = new Guid("{FB4B43E4-0328-4056-82A5-7E03BE347082}");
 
                 // start new service

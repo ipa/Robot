@@ -164,6 +164,12 @@ namespace RobotCtrl
             RobotConsole[BlinkingLeds.BlinkingLed2].LedEnabled = false;
             RobotConsole[BlinkingLeds.BlinkingLed3].LedEnabled = false;
             RobotConsole[Leds.Led4].LedEnabled = false;
+
+            //DIE HÄSSLICHKEIT: (Spieglein spieglein an der Wand wer ist der hässlichste Code im ganzen Land?)
+            //Es ist die robot.cs!!!!
+            RobotConsole[Switches.Switch2].SwitchEnabled = true;
+            RobotConsole[Switches.Switch2].SwitchEnabled = false;
+
         }
 
 

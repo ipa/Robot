@@ -37,8 +37,7 @@ namespace CommandInterpreter
             {
                 String path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase), "htdocs");
                 path = Path.Combine(path, "drive.txt");
-                FileStream f = File.Open(path, FileMode.OpenOrCreate);
-                writer = new StreamWriter(f);
+                writer = File.AppendText(path);
                 
                 Drive drive = World.Robot.drv;
                 MethodInfo methodInfo = drive.GetType().GetMethod(cmd.Method, cmd.GetTypes().ToArray());
