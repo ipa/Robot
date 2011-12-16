@@ -7,6 +7,7 @@ using System.IO;
 using ServerPattern;
 using System.Net.Sockets;
 using Executor;
+using System.Threading;
 
 namespace BTServer
 {
@@ -17,6 +18,12 @@ namespace BTServer
         public static void Main()
         {
             StartServer();
+        }
+
+        public override void Start()
+        {
+            Thread server = new Thread(Run);
+            server.Start();
         }
 
         public static void StartServer()

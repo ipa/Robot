@@ -114,7 +114,7 @@ namespace CommandInterpreterTest
             //cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
             //cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
             ////cmd.Parameters.Add(new CommandParam() { Type = typeof(float), Parameter = 1 });
-
+            
             interpreter.InterpretCommand(cmd);
 
             //target.InterpretCommand(cmd);

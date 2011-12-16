@@ -71,7 +71,8 @@ namespace TestWorldCE
         {
             if (e.Swi == Switches.Switch2 && e.SwitchEnabled)
             {
-                view.SaveImage("image.bmp");
+                 String htdocs = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase),"htdocs");
+                view.SaveImage(Path.Combine(htdocs,"image.bmp"));
             }
         }
     }
