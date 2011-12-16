@@ -18,10 +18,13 @@ namespace ServerPattern
         public const string DEFAULTHOST = "localhost";
 
         virtual protected void Run() {
-            try {
+            
                 IExecutor executor = CreateExecutor();
                 Socket listen = CreateServerSocket();
+                try
+                {
                 while (running) {
+                    
                     AbstractHandler handler = CreateHandler(listen.Accept());
                     executor.Execute(handler.Run);
                 }
@@ -34,14 +37,18 @@ namespace ServerPattern
             return new PlainThreadExecutor();
         }
 
-        virtual protected Socket CreateServerSocket() {
-            IPAddress ipAddress = Dns.GetHostEntry(host).AddressList[0];
-            TcpListener listener = new TcpListener(ipAddress, port);
+    
+        TcpListener listener;
+        virtual protected Socket CreateServerSocket()
+        {
+            IPAddress ipAddress = IPAddress.Parse("192.168.1.111");
+            listener = new TcpListener(ipAddress, port);
+            
             listener.Start();
             return listener.Server;
         }
 
-        public void Start() {
+        public virtual void Start() {
             this.Start(DEFAULTPORT, DEFAULTHOST);
         }
 
