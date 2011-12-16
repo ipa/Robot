@@ -80,48 +80,19 @@ namespace BluetoothClient
 
         }
 
-        public  BluetoothDevice DiscoverDev(Guid service)
-        {
-            // search for reachable devices
-            BluetoothDiscovery discovery = new BluetoothDiscovery();
-
-            // Search for maximum 12 devices
-            // Exclude paired devices
-            // Exclude remebered devices
-            // Include unknown devices
-            BluetoothDeviceCollection bdc =
-                discovery.DiscoverDevices(12,true,true,true);
-            
-            lstBluetooth.Items.Clear();
-            foreach (BluetoothDevice device in bdc)
-            {
-                if (device.HasService(service))
-                {
-                 //   MessageBox.Show(device.Name + ";" + device.DeviceAddress);
-                    lstBluetooth.Items.Add("+ " + device.DeviceAddress);
-                    return device;
-                }
-                else
-                {
-                    lstBluetooth.Items.Add("- " + device.DeviceAddress);
-                }
-            }
-            MessageBox.Show("Required service does not exist on target");
-            return null;
-        }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {try
                 {
             Guid service = BluetoothServiceList.Robot09;
             List<Command> elCommandos = lstCommands.Items.OfType<Command>().ToList();
-            BluetoothDevice device = DiscoverDev(service);
 
-            if (device != null)
+            TA.Bluetooth.BluetoothClient bc = BluetoothDevice.Connect(((RobotItem)cbxRobot.SelectedItem).mac, service);
+
+            if (bc != null && bc.IsConnected())
             {
-                
-                    // connect to desired service
-                    TA.Bluetooth.BluetoothClient bc = device.Connect(service);
+                 
+                  
 
                     // read transmitted data
                     
@@ -144,6 +115,50 @@ namespace BluetoothClient
         {
             MessageBox.Show(ex.ToString());
         }
+        }
+
+        public class RobotItem
+        {
+            public RobotItem(string name, string mac)
+            {
+                this.mac = mac;
+                this.name = name;
+            }
+            public string mac;
+            public string name;
+
+            public override string ToString()
+            {
+                return name;
+            }
+        }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+             cbxRobot.Items.Add(new RobotItem("HSLU_01", "001BDC002157"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_02", "001BDC0FFDEF"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_03", "001BDC0021C4"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_04", "001BDC0F8F39"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_05", "001BDC00202F"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_06", "001BDC0003CC"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_07", "001BDC002140"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_08", "001BDC0FFEDE"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_09", "001BDC0FFE1C"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_10", "001BDC000023"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_11", "001BDC0021F1"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_12", "001BDC002145"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_13", "001BDC00034C"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_14", "001BDC002139"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_15", "001BDC0FF453"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_16", "001BDC0022D5"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_17", "001BDC0022D6"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_18", "001BDC00212A"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_19", "001BDC0FFDED"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_20", "001BDC0FF360"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_21", "001BDC0FE81D"));
+             cbxRobot.Items.Add(new RobotItem("HSLU_25", ""));
+             cbxRobot.Items.Add(new RobotItem("HSLU_30", "001BDC0021D1"));
+
+            
         }
     }
 }
