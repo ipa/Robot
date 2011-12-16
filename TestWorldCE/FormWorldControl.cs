@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using RobotCtrl;
 using BTServer;
 using Http;
+using System.IO;
+using System.Reflection;
 
 namespace TestWorldCE
 {
@@ -38,7 +40,7 @@ namespace TestWorldCE
             
             r.ConfigurePathRecording(0.05f, 0.1f);
 
-            drv.Position = new PositionInfo(0f, 0.75f, 0f);
+            drv.Position = new PositionInfo(5.0f, 5.0f, 0.0f);
 
             r.drv = drv;
             r.Color = Color.Red;
@@ -73,6 +75,7 @@ namespace TestWorldCE
             {
                  String htdocs = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase),"htdocs");
                 view.SaveImage(Path.Combine(htdocs,"image.bmp"));
+                view.SaveImage(@"\CompactFlash\Ftp\image.bmp");
             }
         }
     }

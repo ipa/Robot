@@ -25,7 +25,9 @@ namespace TestWorldCE
 
         public void SaveImage(string filename)
         {
-            this.worldView1.SaveImage(filename);
+            this.worldView1.Invoke(
+            new Action<string>(this.worldView1.SaveImage)
+        ,new object[]{filename});
         }
 
 

@@ -13,6 +13,7 @@ using System.Data;
 using System.Text;
 using System.Windows.Forms;
 using RobotCtrl;
+using System.IO;
 
 namespace RobotView
 {
@@ -117,6 +118,7 @@ namespace RobotView
         public void SaveImage(string filename)
         {
             UpdateView();
+            File.Delete(filename);
             this.pictureBox.Image.Save(filename, System.Drawing.Imaging.ImageFormat.Bmp);
         }
 

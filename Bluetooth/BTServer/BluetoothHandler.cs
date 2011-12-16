@@ -51,9 +51,9 @@ namespace BTServer
         protected override void CreateResponse()
         {
             // Output data to stream
-            sw.WriteLine("Hello from " + BluetoothRadio.PrimaryRadio.Name);
+        //    sw.WriteLine("Hello from " + BluetoothRadio.PrimaryRadio.Name);
 
-            sw.Flush();
+          //  sw.Flush();
 
             Thread.Sleep(100);
 
